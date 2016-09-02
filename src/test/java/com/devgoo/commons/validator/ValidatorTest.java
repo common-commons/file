@@ -13,12 +13,18 @@ import static org.junit.Assert.assertTrue;
  * Created by madimetja on 2016/09/02.
  */
 public class ValidatorTest {
-
 	private ValidatorInterface validator;
 
 	@Before
 	public void setUp() {
 		validator = new Validators();
+	}
+
+	@Test
+	public void validateEmptyStringRegardlessOfType() {
+		assertFalse(validator.validate("", FileFormats.JSON));
+		assertFalse(validator.validate("", FileFormats.TXT));
+		assertFalse(validator.validate("", FileFormats.CSV));
 	}
 
 	@Test
@@ -31,5 +37,23 @@ public class ValidatorTest {
 	public void validateIncorrectJson() {
 		String json = "{name\":\"name}";
 		assertFalse(validator.validate(json, FileFormats.JSON));
+	}
+
+	@Test
+	public void validateCorrectJsonArrays() {
+		String json = "{\"names\":[\"chris\", \"john\"], \"age\":[\"12\", \"32\"]}";
+		assertTrue(validator.validate(json, FileFormats.JSON));
+	}
+
+	@Test
+	public void validateInCorrectJsonArrays() {
+		String json = "{\"names\":{\"chris\", \"john\"], \"age\":[\"12\", \"32\"}}";
+		assertFalse(validator.validate(json, FileFormats.JSON));
+	}
+
+	@Test
+	public void validateJsonObjectAndArray() {
+		String json = "{\"names\":[\"chris\", \"john\"], \"age\":[\"12\", \"32\"], \"town\":\"Johannesburg\"}";
+		assertTrue(validator.validate(json, FileFormats.JSON));
 	}
 }
