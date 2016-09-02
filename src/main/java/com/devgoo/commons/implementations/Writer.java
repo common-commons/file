@@ -1,10 +1,14 @@
 package com.devgoo.commons.implementations;
 
 import com.devgoo.commons.exceptions.InvalidFileFormatException;
+import com.devgoo.commons.exceptions.UnknownFileFormatException;
 import com.devgoo.commons.interfaces.ValidatorInterface;
 import com.devgoo.commons.interfaces.WriterInterface;
 import com.devgoo.commons.util.FileFormats;
 import com.devgoo.commons.wrapper.PhatFile;
+
+import java.io.File;
+import java.io.IOException;
 
 /**
  * Created by chrismipi on 2016/09/02.
@@ -15,8 +19,32 @@ public class Writer implements WriterInterface {
 	private static final String JSON = ".json";
 
 	@Override
-	public PhatFile writeToFile(String name, String fileContent, String absoluteFilePath, FileFormats outputFileFormat) {
-		return null;
+	public PhatFile writeToFile(FileFormats output, String content, String absoluteFilePath) throws InvalidFileFormatException, IOException, UnknownFileFormatException {
+		java.io.File f;
+
+		switch(output) {
+			case TXT:
+				f = new java.io.File(absoluteFilePath);
+				break;
+			case JSON:
+				validateJson(content);
+				f = new java.io.File(absoluteFilePath);
+
+				break;
+			default:
+				throw new InvalidFileFormatException("File format is not Supported.");
+		}
+
+		if(!f.exists())
+			if(!f.createNewFile())
+				throw new UnknownFileFormatException("File or Directory does not exist.");
+		return createFile(f, content, null,output);
+	}
+
+	private void validateJson(String content) throws InvalidFileFormatException {
+		final ValidatorInterface v = new Validators();
+		if(!v.validate(content.trim(), FileFormats.JSON))
+			throw new InvalidFileFormatException("The JSON content is not valid.");
 	}
 
 	@Override
@@ -30,17 +58,18 @@ public class Writer implements WriterInterface {
 				properName = name + TXT;
 				break;
 			case JSON:
-				ValidatorInterface v = new Validators();
-				if(v.validate(content.trim(), output)) {
-					f = java.io.File.createTempFile(name, JSON);
-					properName = name + JSON;
-				}
-				else throw new InvalidFileFormatException("The JSON content is not valid.");
+				validateJson(content);
+				f = java.io.File.createTempFile(name, JSON);
+				properName = name + JSON;
 				break;
 			default:
 				throw new InvalidFileFormatException("File format is not Supported.");
 		}
 
+		return createFile(f, content, properName, output);
+	}
+
+	private PhatFile createFile(File f, String content, String properName, FileFormats output) throws IOException {
 		java.io.FileWriter fw = new java.io.FileWriter(f.getAbsoluteFile());
 		java.io.BufferedWriter bw = new java.io.BufferedWriter(fw);
 		bw.write(content);
@@ -48,7 +77,10 @@ public class Writer implements WriterInterface {
 
 		PhatFile file = new PhatFile(f.toURI());
 		file.setFormat(output);
-		file.setName(properName);
+
+		if(properName != null)
+			file.setName(properName);
+
 		return file;
 	}
 }
