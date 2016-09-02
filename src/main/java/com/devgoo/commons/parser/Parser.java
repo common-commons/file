@@ -2,6 +2,7 @@ package com.devgoo.commons.parser;
 
 import com.devgoo.commons.exceptions.InvalidFileFormatException;
 import com.devgoo.commons.exceptions.UnknownFileFormatException;
+import com.devgoo.commons.implementations.Validators;
 import com.devgoo.commons.interfaces.ParserInterface;
 import com.devgoo.commons.util.FileFormats;
 import com.devgoo.commons.wrapper.PhatFile;
@@ -18,6 +19,8 @@ import java.io.IOException;
  * Created by madimetja on 2016/09/02.
  */
 public class Parser implements ParserInterface {
+
+	private Validators validators = new Validators();
 
 	public PhatFile parseFile(String absoluteFilePath, FileFormats fileFormat) throws UnknownFileFormatException, IOException, InvalidFileFormatException {
 
@@ -62,29 +65,12 @@ public class Parser implements ParserInterface {
 
 		PhatFile jsonFile = new PhatFile(absoluteFilePath);
 
-		try {
-
-			//validate the file content. If this line does not throw
-			//an exception, then the content is valid JSON.
-
-			//This logic only ensures that the content is a valid JSON Object.
-			new JSONObject(jsonFile.getContentAsString());
-
+		//validate the file content. If this line does not throw
+		//an exception, then the content is valid JSON.
+		if(validators.validate(jsonFile.getContentAsString(), FileFormats.JSON)){
 			return jsonFile;
-
-		} catch (JSONException e) {
-
-			try{
-
-				//If the content is not a valid JSONObject,
-				//we continue to check if it is at least a valid JSONArray.
-				new JSONArray(jsonFile.getContentAsString());
-
-				return jsonFile;
-			} catch (JSONException e1) {
-				e1.printStackTrace();
-				throw new InvalidFileFormatException(e1.getLocalizedMessage());
-			}
+		}else{
+			throw new InvalidFileFormatException("The given file is not valid JSON.");
 		}
 	}
 
