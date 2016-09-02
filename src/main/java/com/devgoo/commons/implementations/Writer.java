@@ -7,19 +7,19 @@ import com.devgoo.commons.interfaces.WriterInterface;
 import com.devgoo.commons.util.FileFormats;
 import com.devgoo.commons.wrapper.PhatFile;
 
-import java.io.File;
 import java.io.IOException;
+
+import static com.devgoo.commons.util.FileFormats.JSON;
+
+;
 
 /**
  * Created by chrismipi on 2016/09/02.
  */
 public class Writer implements WriterInterface {
-	private static final String TXT = ".txt";
-	private static final String CSV = ".csv";
-	private static final String JSON = ".json";
 
 	@Override
-	public PhatFile writeToFile(FileFormats output, String content, String absoluteFilePath) throws InvalidFileFormatException, IOException, UnknownFileFormatException {
+	public PhatFile writeToFile(FileFormats output, String content, String absoluteFilePath) throws InvalidFileFormatException, java.io.IOException, UnknownFileFormatException {
 		java.io.File f;
 
 		switch(output) {
@@ -43,7 +43,7 @@ public class Writer implements WriterInterface {
 
 	private void validateJson(String content) throws InvalidFileFormatException {
 		final ValidatorInterface v = new Validators();
-		if(!v.validate(content.trim(), FileFormats.JSON))
+		if(!v.validate(content.trim(), JSON))
 			throw new InvalidFileFormatException("The JSON content is not valid.");
 	}
 
@@ -54,22 +54,21 @@ public class Writer implements WriterInterface {
 
 		switch(output) {
 			case TXT:
-				f = java.io.File.createTempFile(name, TXT);
-				properName = name + TXT;
+				f = java.io.File.createTempFile(name, FileFormats.TXT.getExtension());
+				properName = name + FileFormats.TXT.getExtension();
 				break;
 			case JSON:
 				validateJson(content);
-				f = java.io.File.createTempFile(name, JSON);
-				properName = name + JSON;
+				f = java.io.File.createTempFile(name, output.getExtension());
+				properName = name + output.getExtension();
 				break;
 			default:
 				throw new InvalidFileFormatException("File format is not Supported.");
 		}
-
 		return createFile(f, content, properName, output);
 	}
 
-	private PhatFile createFile(File f, String content, String properName, FileFormats output) throws IOException {
+	private PhatFile createFile(java.io.File f, String content, String properName, FileFormats output) throws IOException {
 		java.io.FileWriter fw = new java.io.FileWriter(f.getAbsoluteFile());
 		java.io.BufferedWriter bw = new java.io.BufferedWriter(fw);
 		bw.write(content);
@@ -78,7 +77,7 @@ public class Writer implements WriterInterface {
 		PhatFile file = new PhatFile(f.toURI());
 		file.setFormat(output);
 
-		if(properName != null)
+		if(properName != null && !properName.isEmpty())
 			file.setName(properName);
 
 		return file;
