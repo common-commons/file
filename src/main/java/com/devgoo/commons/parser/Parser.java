@@ -31,9 +31,11 @@ public class Parser implements ParserInterface {
 				return parseJsonFile(absoluteFilePath);
 			case CSV:
 				return parseCsvFile(absoluteFilePath);
+			case XML:
+				return parseXmlFile(absoluteFilePath);
+			default:
+				throw new UnknownFileFormatException("Unsupported file version.");
 		}
-
-		throw new UnknownFileFormatException("Unsupported file version.");
 	}
 
 	/**
@@ -90,6 +92,17 @@ public class Parser implements ParserInterface {
 	 * @return Returns the file parsed into a PhatFile.
 	 */
 	private PhatFile parseCsvFile(String absoluteFilePath) {
+		return null;
+	}
+
+	/**
+	 * Parses a given .xml file.
+	 *
+	 * @param absoluteFilePath The absolute path to the .xml file.
+	 *
+	 * @return Returns the file parsed into a PhatFile.
+	 */
+	private PhatFile parseXmlFile(String absoluteFilePath) {
 		return null;
 	}
 }
