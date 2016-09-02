@@ -75,8 +75,6 @@ public class JsonParserTest {
 
 			assertNotNull(plainTextFile);
 
-			System.out.println(plainTextFile.getContentAsString());
-
 			assertEquals(plainTextFile.getContentAsString(), "[\n" +
 				"  \"Value Within List\",\n" +
 				"  \"Another Value Within List\",\n" +
