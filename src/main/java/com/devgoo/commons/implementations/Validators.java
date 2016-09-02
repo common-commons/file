@@ -2,6 +2,7 @@ package com.devgoo.commons.implementations;
 
 import com.devgoo.commons.interfaces.ValidatorInterface;
 import com.devgoo.commons.util.FileFormats;
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -11,14 +12,19 @@ import org.json.JSONObject;
 public class Validators implements ValidatorInterface {
 	@Override
 	public boolean validate(String content, FileFormats format) {
+		if(content == null) return false;
 		switch (format) {
 			case JSON:
-				try{
-					new JSONObject(content);
-					return true;
-				} catch (JSONException e) {
-					return false;
+				try {
+					new JSONObject(content.trim());
+				} catch (JSONException ex) {
+					try {
+						new JSONArray(content.trim());
+					} catch (JSONException ex1) {
+						return false;
+					}
 				}
+				return true;
 
 			default:
 				return false;
