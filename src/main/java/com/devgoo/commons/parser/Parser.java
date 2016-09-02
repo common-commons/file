@@ -45,11 +45,21 @@ public class Parser implements ParserInterface {
 	/**
 	 * Parses a given .json file.
 	 *
+	 * The function will first validate that the given file is
+	 * a valid Json file. If not, an exception will be thrown.
+	 *
 	 * @param absoluteFilePath The absolute path to the .json file.
 	 *
 	 * @return Returns the file parsed into a PhatFile.
 	 */
 	private PhatFile parseJsonFile(String absoluteFilePath) {
+
+		PhatFile jsonFile = new PhatFile(absoluteFilePath);
+
+		//validate the file content
+		validateContentIsJson(jsonFile.getContentAsString());
+
+		new JSONObject(test);
 		return null;
 	}
 
