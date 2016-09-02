@@ -2,8 +2,7 @@ package com.devgoo.commons.parser;
 
 import com.devgoo.commons.interfaces.ParserInterface;
 import com.devgoo.commons.util.FileFormats;
-
-import java.io.File;
+import com.devgoo.commons.wrapper.PhatFile;
 
 /**
  * Concrete Parser Class. This class implemets the contract specified by
@@ -13,7 +12,7 @@ import java.io.File;
  */
 public class Parser implements ParserInterface {
 
-	public File parseFile(String absoluteFilePath, FileFormats fileFormat) {
+	public PhatFile parseFile(String absoluteFilePath, FileFormats fileFormat) {
 		return null;
 	}
 
