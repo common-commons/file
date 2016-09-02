@@ -27,16 +27,48 @@ public class Parser implements ParserInterface {
 		throw new UnknownFileFormatException("");
 	}
 
+	/**
+	 * Parses a given .txt file.
+	 *
+	 * In essence, text files will just be spat out as they
+	 * are found. No special formatting or rules to be applied
+	 * as these files can follow any format.
+	 *
+	 * @param absoluteFilePath The absolute path to the .txt file.
+	 *
+	 * @return Returns the file parsed into a PhatFile.
+	 */
 	private PhatFile parseTextFile(String absoluteFilePath) {
-		return null;
+		return new PhatFile(absoluteFilePath);
 	}
 
+	/**
+	 * Parses a given .json file.
+	 *
+	 * @param absoluteFilePath The absolute path to the .json file.
+	 *
+	 * @return Returns the file parsed into a PhatFile.
+	 */
 	private PhatFile parseJsonFile(String absoluteFilePath) {
 		return null;
 	}
 
+	/**
+	 * Parses a given .csv file. The logic will attempt to pick up the delimiter automatically.
+	 *
+	 * The supported delimiters are the following:
+	 * 1. Pipe "|"
+	 * 2. Comma ","
+	 * 3. Space " "
+	 * 4. Tilda "~"
+	 *
+	 * If an unsupported delimiter is found, then an exception will be thrown.
+	 *
+	 * @param absoluteFilePath The absolute path to the .csv file.
+	 *
+	 * @return Returns the file parsed into a PhatFile.
+	 */
 	private PhatFile parseCsvFile(String absoluteFilePath) {
 		return null;
 	}
-
 }
