@@ -13,7 +13,7 @@ import org.json.JSONObject;
 import java.io.IOException;
 
 /**
- * Concrete Parser Class. This class implemets the contract specified by
+ * Concrete Parser Class. This class implements the contract specified by
  * the Parser Interface.
  *
  * Created by madimetja on 2016/09/02.
