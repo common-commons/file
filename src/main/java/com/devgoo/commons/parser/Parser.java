@@ -1,9 +1,15 @@
 package com.devgoo.commons.parser;
 
+import com.devgoo.commons.exceptions.InvalidFileFormatException;
 import com.devgoo.commons.exceptions.UnknownFileFormatException;
 import com.devgoo.commons.interfaces.ParserInterface;
 import com.devgoo.commons.util.FileFormats;
 import com.devgoo.commons.wrapper.PhatFile;
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.IOException;
 
 /**
  * Concrete Parser Class. This class implemets the contract specified by
@@ -13,7 +19,7 @@ import com.devgoo.commons.wrapper.PhatFile;
  */
 public class Parser implements ParserInterface {
 
-	public PhatFile parseFile(String absoluteFilePath, FileFormats fileFormat) throws UnknownFileFormatException {
+	public PhatFile parseFile(String absoluteFilePath, FileFormats fileFormat) throws UnknownFileFormatException, IOException, InvalidFileFormatException {
 
 		switch (fileFormat) {
 			case TXT:
@@ -45,12 +51,41 @@ public class Parser implements ParserInterface {
 	/**
 	 * Parses a given .json file.
 	 *
+	 * The function will first validate that the given file is
+	 * a valid Json file. If not, an exception will be thrown.
+	 *
 	 * @param absoluteFilePath The absolute path to the .json file.
 	 *
 	 * @return Returns the file parsed into a PhatFile.
 	 */
-	private PhatFile parseJsonFile(String absoluteFilePath) {
-		return null;
+	private PhatFile parseJsonFile(String absoluteFilePath) throws IOException, InvalidFileFormatException {
+
+		PhatFile jsonFile = new PhatFile(absoluteFilePath);
+
+		try {
+
+			//validate the file content. If this line does not throw
+			//an exception, then the content is valid JSON.
+
+			//This logic only ensures that the content is a valid JSON Object.
+			new JSONObject(jsonFile.getContentAsString());
+
+			return jsonFile;
+
+		} catch (JSONException e) {
+
+			try{
+
+				//If the content is not a valid JSONObject,
+				//we continue to check if it is at least a valid JSONArray.
+				new JSONArray(jsonFile.getContentAsString());
+
+				return jsonFile;
+			} catch (JSONException e1) {
+				e.printStackTrace();
+				throw new InvalidFileFormatException(e.getLocalizedMessage());
+			}
+		}
 	}
 
 	/**

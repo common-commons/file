@@ -1,0 +1,12 @@
+{
+  "title": "Barney Is A Dinaa-whaaa??",
+  "description": "Incredibly random description...",
+  "listNode": [
+    "Value Within List",
+    "Another Value Within List",
+    "A Final Value Within The List"
+  ],
+  "nestedObject": {
+    "nestedKey": "Nested Key Value"
+  }
+}
