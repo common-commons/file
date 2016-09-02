@@ -2,6 +2,8 @@ package com.devgoo.commons.writter;
 
 import com.devgoo.commons.implementations.Writer;
 import com.devgoo.commons.interfaces.WriterInterface;
+import com.devgoo.commons.util.FileFormats;
+import com.devgoo.commons.wrapper.PhatFile;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -23,6 +25,10 @@ public class GenerateFileTest {
 
 	@Test
 	public void writeTxtFile() {
+		String content = "Hello World";
+
+		PhatFile file = writer.writeToFile(content, FileFormats.TXT);
+
 		assertTrue(true);
 	}
 }
