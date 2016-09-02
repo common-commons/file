@@ -18,5 +18,4 @@ public interface ParserInterface {
 	 * @return Returns a Java IO File instance of the file parsed.
 	 */
 	File parseFile(String absoluteFilePath, FileFormats fileFormat);
-
 }
