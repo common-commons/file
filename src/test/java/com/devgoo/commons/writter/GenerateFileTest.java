@@ -7,8 +7,9 @@ import com.devgoo.commons.wrapper.PhatFile;
 import org.junit.Before;
 import org.junit.Test;
 
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertTrue;
+import java.io.IOException;
+
+import static org.junit.Assert.*;
 
 
 /**
@@ -25,10 +26,18 @@ public class GenerateFileTest {
 
 	@Test
 	public void writeTxtFile() {
-		String content = "Hello World, how are you World ?";
+		try {
+			String content = "Hello World, how are you World ?";
 
-		PhatFile file = writer.writeToFile(content, FileFormats.TXT);
+			PhatFile file = writer.writeToFile("name", content, FileFormats.TXT);
 
-		assertTrue(true);
+			assertTrue(file.exists());
+
+			assertEquals("name.txt", file.getName());
+			assertEquals(FileFormats.TXT, file.getFormat());
+			assertEquals(content, file.getContentAsString());
+		} catch (IOException e) {
+			fail(e.getLocalizedMessage());
+		}
 	}
 }

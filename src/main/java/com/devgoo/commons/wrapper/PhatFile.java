@@ -2,12 +2,15 @@ package com.devgoo.commons.wrapper;
 
 import com.devgoo.commons.util.FileFormats;
 
+import java.io.IOException;
+
 /**
  * Created by madimetja on 2016/09/02.
  */
 public class PhatFile extends java.io.File {
 	private final java.io.File file;
 	private FileFormats format;
+	private String name;
 
 	/**
 	 * Default constructor for {@link java.io.File}
@@ -52,11 +55,25 @@ public class PhatFile extends java.io.File {
 	 *
 	 * @return string {@link String}
 	 */
-	public String getContentAsString() throws java.io.FileNotFoundException {
-		return new java.util.Scanner(this.file).useDelimiter("\\Z").next();
+	public String getContentAsString() throws IOException {
+		return new String(java.nio.file.Files.readAllBytes(java.nio.file.Paths.get(this.file.getAbsolutePath())));
 	}
 
 	public FileFormats getFormat() {
 		return format;
+	}
+
+	public void setFormat(FileFormats format) {
+		this.format = format;
+	}
+
+	@Override
+	public String getName() {
+		if (name != null && !name.isEmpty()) return name;
+		else return super.getName();
+	}
+
+	public void setName(String name) {
+		this.name = name;
 	}
 }
