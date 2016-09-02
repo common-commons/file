@@ -33,7 +33,7 @@ public class Parser implements ParserInterface {
 				return parseCsvFile(absoluteFilePath);
 		}
 
-		throw new UnknownFileFormatException("");
+		throw new UnknownFileFormatException("Unsupported file version.");
 	}
 
 	/**
