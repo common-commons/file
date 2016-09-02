@@ -1,7 +1,8 @@
-package com.devgoo.common-commons;
+package com.devgoo.commons;
+
+import junit.framework.TestCase;
 
 import junit.framework.Test;
-import junit.framework.TestCase;
 import junit.framework.TestSuite;
 
 /**

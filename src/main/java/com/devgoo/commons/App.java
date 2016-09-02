@@ -1,4 +1,4 @@
-package com.devgoo.common-commons;
+package com.devgoo.commons;
 
 /**
  * Hello world!
