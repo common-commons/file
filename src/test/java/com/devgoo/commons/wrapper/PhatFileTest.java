@@ -4,7 +4,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import java.io.File;
-import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.net.URISyntaxException;
 import java.net.URL;
 
@@ -36,8 +36,7 @@ public class PhatFileTest {
 
 			PhatFile file = new PhatFile(tmp.toURI());
 			assertEquals("hello world\nhow are you world.", file.getContentAsString());
-		} catch (FileNotFoundException | URISyntaxException e) {
-			e.printStackTrace();
+		} catch (URISyntaxException | IOException e) {
 			fail(e.getLocalizedMessage());
 		}
 	}

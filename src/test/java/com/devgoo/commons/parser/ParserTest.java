@@ -35,7 +35,6 @@ public class ParserTest {
 	@Test
 	public void testParseTextFile(){
 		try{
-
 			PhatFile plainTextFile = parser.parseFile(classLoader.getResource(PATH_TO_TEXT_FILE).getPath(), FileFormats.TXT);
 
 			assertNotNull(plainTextFile);
