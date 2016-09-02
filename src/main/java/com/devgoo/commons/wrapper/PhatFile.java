@@ -17,9 +17,8 @@ public class PhatFile extends java.io.File {
 
 	/**
 	 * Default constructor
-	 * @param parent {@link File}
-	 * @param child {@link File}
-	 * @param file
+	 * @param parent {@link String}
+	 * @param child {@link String}
 	 */
 	public PhatFile(String parent, String child) {
 		super(parent, child);
