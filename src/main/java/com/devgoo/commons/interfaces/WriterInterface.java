@@ -1,5 +1,6 @@
 package com.devgoo.commons.interfaces;
 
+import com.devgoo.commons.exceptions.InvalidFileFormatException;
 import com.devgoo.commons.util.FileFormats;
 import com.devgoo.commons.wrapper.PhatFile;
 
@@ -26,5 +27,5 @@ public interface WriterInterface {
 	 * @param output output format {e.g: csv, json, txt}
 	 * @return {@link PhatFile} which extends {@link java.io.File}
 	 */
-	PhatFile writeToFile(String name, String content, FileFormats output) throws IOException;
+	PhatFile writeToFile(String name, String content, FileFormats output) throws IOException, InvalidFileFormatException;
 }

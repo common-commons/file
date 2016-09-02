@@ -2,8 +2,6 @@ package com.devgoo.commons.wrapper;
 
 import com.devgoo.commons.util.FileFormats;
 
-import java.io.IOException;
-
 /**
  * Created by madimetja on 2016/09/02.
  */
@@ -55,7 +53,7 @@ public class PhatFile extends java.io.File {
 	 *
 	 * @return string {@link String}
 	 */
-	public String getContentAsString() throws IOException {
+	public String getContentAsString() throws java.io.IOException {
 		return new String(java.nio.file.Files.readAllBytes(java.nio.file.Paths.get(this.file.getAbsolutePath())));
 	}
 
