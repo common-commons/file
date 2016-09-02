@@ -1,6 +1,7 @@
 package com.devgoo.commons.implementations;
 
 import com.devgoo.commons.exceptions.InvalidFileFormatException;
+import com.devgoo.commons.interfaces.ValidatorInterface;
 import com.devgoo.commons.interfaces.WriterInterface;
 import com.devgoo.commons.util.FileFormats;
 import com.devgoo.commons.wrapper.PhatFile;
@@ -29,8 +30,12 @@ public class Writer implements WriterInterface {
 				properName = name + TXT;
 				break;
 			case JSON:
-				f = java.io.File.createTempFile(name, JSON);
-				properName = name + JSON;
+				ValidatorInterface v = new Validators();
+				if(v.validate(content.trim(), output)) {
+					f = java.io.File.createTempFile(name, JSON);
+					properName = name + JSON;
+				}
+				else throw new InvalidFileFormatException("The JSON content is not valid.");
 				break;
 			default:
 				throw new InvalidFileFormatException("File format is not Supported.");

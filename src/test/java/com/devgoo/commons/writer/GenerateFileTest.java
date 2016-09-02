@@ -43,7 +43,7 @@ public class GenerateFileTest {
 	}
 
 	@Test
-	public void writeJSONFile() {
+	public void writeCorrectJSONFile() {
 		try {
 			String content = "{\"message\":\"Hello World, how are you World ?\"}";
 
@@ -56,6 +56,19 @@ public class GenerateFileTest {
 			assertEquals(content, file.getContentAsString());
 		} catch (IOException | InvalidFileFormatException e) {
 			fail(e.getLocalizedMessage());
+		}
+	}
+
+	@Test
+	public void writeInCorrectJSONFile() {
+		try {
+			String content = "{\"message\":Hello World, how are you World ?\"}";
+
+			writer.writeToFile("output", content, FileFormats.JSON);
+
+			fail("Not supposed to pass, JSON is incorrect.");
+		} catch (IOException | InvalidFileFormatException e) {
+			assertEquals("The JSON content is not valid.", e.getLocalizedMessage());
 		}
 	}
 }
