@@ -57,7 +57,7 @@ public class ParserTest {
 	public void testParseJsonFile(){
 		try{
 
-			PhatFile plainTextFile = parser.parseFile(classLoader.getResource(PATH_TO_TEXT_FILE).getPath(), FileFormats.JSON);
+			PhatFile plainTextFile = parser.parseFile(classLoader.getResource(PATH_TO_JSON_FILE).getPath(), FileFormats.JSON);
 
 			assertNotNull(plainTextFile);
 

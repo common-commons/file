@@ -1,9 +1,14 @@
 package com.devgoo.commons.parser;
 
+import com.devgoo.commons.exceptions.InvalidFileFormatException;
 import com.devgoo.commons.exceptions.UnknownFileFormatException;
 import com.devgoo.commons.interfaces.ParserInterface;
 import com.devgoo.commons.util.FileFormats;
 import com.devgoo.commons.wrapper.PhatFile;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.IOException;
 
 /**
  * Concrete Parser Class. This class implemets the contract specified by
@@ -13,7 +18,7 @@ import com.devgoo.commons.wrapper.PhatFile;
  */
 public class Parser implements ParserInterface {
 
-	public PhatFile parseFile(String absoluteFilePath, FileFormats fileFormat) throws UnknownFileFormatException {
+	public PhatFile parseFile(String absoluteFilePath, FileFormats fileFormat) throws UnknownFileFormatException, IOException, InvalidFileFormatException {
 
 		switch (fileFormat) {
 			case TXT:
@@ -52,15 +57,22 @@ public class Parser implements ParserInterface {
 	 *
 	 * @return Returns the file parsed into a PhatFile.
 	 */
-	private PhatFile parseJsonFile(String absoluteFilePath) {
+	private PhatFile parseJsonFile(String absoluteFilePath) throws IOException, InvalidFileFormatException {
 
 		PhatFile jsonFile = new PhatFile(absoluteFilePath);
 
-		//validate the file content
-		validateContentIsJson(jsonFile.getContentAsString());
+		try {
 
-		new JSONObject(test);
-		return null;
+			//validate the file content. If this line does not throw
+			//an exception, then the content is valid JSON.
+			new JSONObject(jsonFile.getContentAsString());
+
+			return jsonFile;
+
+		} catch (JSONException e) {
+			e.printStackTrace();
+			throw new InvalidFileFormatException(e.getLocalizedMessage());
+		}
 	}
 
 	/**
