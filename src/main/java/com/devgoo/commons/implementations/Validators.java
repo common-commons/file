@@ -12,6 +12,7 @@ import org.json.JSONObject;
 public class Validators implements ValidatorInterface {
 	@Override
 	public boolean validate(String content, FileFormats format) {
+		if(content == null) return false;
 		switch (format) {
 			case JSON:
 				try {

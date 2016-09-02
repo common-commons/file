@@ -25,6 +25,7 @@ public class ValidatorTest {
 		assertFalse(validator.validate("", FileFormats.JSON));
 		assertFalse(validator.validate("", FileFormats.TXT));
 		assertFalse(validator.validate("", FileFormats.CSV));
+		assertFalse(validator.validate("", FileFormats.XML));
 	}
 
 	@Test
@@ -55,5 +56,13 @@ public class ValidatorTest {
 	public void validateJsonObjectAndArray() {
 		String json = "{\"names\":[\"chris\", \"john\"], \"age\":[\"12\", \"32\"], \"town\":\"Johannesburg\"}";
 		assertTrue(validator.validate(json, FileFormats.JSON));
+	}
+
+	@Test
+	public void validateNullRegardlessOfType() {
+		assertFalse(validator.validate(null, FileFormats.JSON));
+		assertFalse(validator.validate(null, FileFormats.TXT));
+		assertFalse(validator.validate(null, FileFormats.CSV));
+		assertFalse(validator.validate(null, FileFormats.XML));
 	}
 }
