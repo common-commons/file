@@ -1,5 +1,6 @@
-package com.devgoo.commons.writter;
+package com.devgoo.commons.writer;
 
+import com.devgoo.commons.exceptions.InvalidFileFormatException;
 import com.devgoo.commons.implementations.Writer;
 import com.devgoo.commons.interfaces.WriterInterface;
 import com.devgoo.commons.util.FileFormats;
@@ -36,7 +37,24 @@ public class GenerateFileTest {
 			assertEquals("name.txt", file.getName());
 			assertEquals(FileFormats.TXT, file.getFormat());
 			assertEquals(content, file.getContentAsString());
-		} catch (IOException e) {
+		} catch (IOException | InvalidFileFormatException e) {
+			fail(e.getLocalizedMessage());
+		}
+	}
+
+	@Test
+	public void writeJSONFile() {
+		try {
+			String content = "{\"message\":\"Hello World, how are you World ?\"}";
+
+			PhatFile file = writer.writeToFile("output", content, FileFormats.JSON);
+
+			assertTrue(file.exists());
+
+			assertEquals("output.json", file.getName());
+			assertEquals(FileFormats.JSON, file.getFormat());
+			assertEquals(content, file.getContentAsString());
+		} catch (IOException | InvalidFileFormatException e) {
 			fail(e.getLocalizedMessage());
 		}
 	}

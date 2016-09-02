@@ -26,7 +26,7 @@ public class PhatFileTest {
 	@Test
 	public void getPhatFileContent() {
 		try {
-			URL url = classLoader.getResource("files/file.txt");
+			URL url = classLoader.getResource("files/writer/file.txt");
 
 			assertNotNull(url);
 
