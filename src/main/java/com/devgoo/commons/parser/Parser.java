@@ -82,8 +82,8 @@ public class Parser implements ParserInterface {
 
 				return jsonFile;
 			} catch (JSONException e1) {
-				e.printStackTrace();
-				throw new InvalidFileFormatException(e.getLocalizedMessage());
+				e1.printStackTrace();
+				throw new InvalidFileFormatException(e1.getLocalizedMessage());
 			}
 		}
 	}
