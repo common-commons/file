@@ -1,5 +1,6 @@
 package com.devgoo.commons.interfaces;
 
+import com.devgoo.commons.exceptions.UnknownFileFormatException;
 import com.devgoo.commons.util.FileFormats;
 import com.devgoo.commons.wrapper.PhatFile;
 
@@ -18,6 +19,6 @@ public interface ParserInterface {
 	 *
 	 * @return Returns a PhatFile instance of the file parsed.
 	 */
-	PhatFile parseFile(String absoluteFilePath, FileFormats fileFormat);
+	PhatFile parseFile(String absoluteFilePath, FileFormats fileFormat) throws UnknownFileFormatException;
 
 }
