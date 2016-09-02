@@ -5,12 +5,9 @@ import com.devgoo.commons.wrapper.PhatFile;
 import org.junit.Before;
 import org.junit.Test;
 
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.net.URISyntaxException;
-import java.net.URL;
-
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.fail;
 
 /**
  * Created by madimetja on 2016/09/02.
@@ -21,26 +18,30 @@ public class ParserTest {
 
 	private Parser parser;
 
+	private final String PATH_TO_TEXT_FILE = "files/parser/textFile.txt";
+
 	@Before
 	public void setUp() {
 		classLoader = getClass().getClassLoader();
 		assertNotNull(classLoader);
+		parser = new Parser();
 	}
 
 	/**
-	 * Ensure that a plain text file on the file system can successfully be parsed.
+	 * Ensure that a plain text file on the file system can successfully be parsed,
+	 * and that the parsed content is accurate.
 	 */
 	@Test
 	public void testParseTextFile(){
 		try{
 
-			PhatFile plainTextFile = parser.parseFile("files/parser/textFile.txt", FileFormats.TXT);
+			PhatFile plainTextFile = parser.parseFile(classLoader.getResource(PATH_TO_TEXT_FILE).getPath(), FileFormats.TXT);
 
 			assertNotNull(plainTextFile);
 
-			assertTrue(plainTextFile.getContentAsString().equals("This is a random TeXt FilE WitH RanDoM Data.\n" +
+			assertEquals(plainTextFile.getContentAsString(), "This is a random TeXt FilE WitH RanDoM Data.\n" +
 				"It should be parsed well if the logic to parse\n" +
-				"plain text files works properly...."));
+				"plain text files works properly....");
 
 		} catch (Exception e){
 			e.printStackTrace();
