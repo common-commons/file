@@ -5,6 +5,7 @@ import com.devgoo.commons.exceptions.UnknownFileFormatException;
 import com.devgoo.commons.interfaces.ParserInterface;
 import com.devgoo.commons.util.FileFormats;
 import com.devgoo.commons.wrapper.PhatFile;
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -65,13 +66,25 @@ public class Parser implements ParserInterface {
 
 			//validate the file content. If this line does not throw
 			//an exception, then the content is valid JSON.
+
+			//This logic only ensures that the content is a valid JSON Object.
 			new JSONObject(jsonFile.getContentAsString());
 
 			return jsonFile;
 
 		} catch (JSONException e) {
-			e.printStackTrace();
-			throw new InvalidFileFormatException(e.getLocalizedMessage());
+
+			try{
+
+				//If the content is not a valid JSONObject,
+				//we continue to check if it is at least a valid JSONArray.
+				new JSONArray(jsonFile.getContentAsString());
+
+				return jsonFile;
+			} catch (JSONException e1) {
+				e.printStackTrace();
+				throw new InvalidFileFormatException(e.getLocalizedMessage());
+			}
 		}
 	}
 

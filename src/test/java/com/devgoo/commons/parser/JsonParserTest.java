@@ -12,14 +12,14 @@ import static org.junit.Assert.fail;
 /**
  * Created by madimetja on 2016/09/02.
  */
-public class ParserTest {
+public class JsonParserTest {
 
 	private ClassLoader classLoader;
 
 	private Parser parser;
 
-	private final String PATH_TO_TEXT_FILE = "files/parser/textFile.txt";
 	private final String PATH_TO_JSON_FILE = "files/parser/jsonFile.json";
+	private final String PATH_TO_JSON_LIST_FILE = "files/parser/jsonListFile.json";
 
 	@Before
 	public void setUp() {
@@ -29,29 +29,10 @@ public class ParserTest {
 	}
 
 	/**
-	 * Ensure that a plain text file on the file system can successfully be parsed,
+	 * Ensure that a JSON file on the file system can successfully be parsed,
 	 * and that the parsed content is accurate.
-	 */
-	@Test
-	public void testParseTextFile(){
-		try{
-			PhatFile plainTextFile = parser.parseFile(classLoader.getResource(PATH_TO_TEXT_FILE).getPath(), FileFormats.TXT);
-
-			assertNotNull(plainTextFile);
-
-			assertEquals(plainTextFile.getContentAsString(), "This is a random TeXt FilE WitH RanDoM Data.\n" +
-				"It should be parsed well if the logic to parse\n" +
-				"plain text files works properly....");
-
-		} catch (Exception e){
-			e.printStackTrace();
-			fail(e.getLocalizedMessage());
-		}
-	}
-
-	/**
-	 * Ensure that a plain text file on the file system can successfully be parsed,
-	 * and that the parsed content is accurate.
+	 *
+	 * More specifically, it ensures that a file with valid JSON Object.
 	 */
 	@Test
 	public void testParseJsonFile(){
@@ -80,4 +61,34 @@ public class ParserTest {
 		}
 	}
 
+	/**
+	 * Ensure that a JSON file on the file system can successfully be parsed,
+	 * and that the parsed content is accurate.
+	 *
+	 * More specifically, it ensures that a file with valid JSON Array.
+	 */
+	@Test
+	public void testParseJsonListFile(){
+		try{
+
+			PhatFile plainTextFile = parser.parseFile(classLoader.getResource(PATH_TO_JSON_LIST_FILE).getPath(), FileFormats.JSON);
+
+			assertNotNull(plainTextFile);
+
+			System.out.println(plainTextFile.getContentAsString());
+
+			assertEquals(plainTextFile.getContentAsString(), "[\n" +
+				"  \"Value Within List\",\n" +
+				"  \"Another Value Within List\",\n" +
+				"  \"A Final Value Within The List\",\n" +
+				"  \"1\",\n" +
+				"  \"3\",\n" +
+				"  \"Another Value\"\n" +
+				"]");
+
+		} catch (Exception e){
+			e.printStackTrace();
+			fail(e.getLocalizedMessage());
+		}
+	}
 }
