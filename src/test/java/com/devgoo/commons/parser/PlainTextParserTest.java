@@ -5,14 +5,12 @@ import com.devgoo.commons.wrapper.PhatFile;
 import org.junit.Before;
 import org.junit.Test;
 
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.fail;
+import static org.junit.Assert.*;
 
 /**
  * Created by madimetja on 2016/09/02.
  */
-public class ParserTest {
+public class PlainTextParserTest {
 
 	private ClassLoader classLoader;
 
@@ -47,5 +45,4 @@ public class ParserTest {
 			fail(e.getLocalizedMessage());
 		}
 	}
-
 }
