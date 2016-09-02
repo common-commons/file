@@ -1,8 +1,7 @@
 package com.devgoo.commons.interfaces;
 
 import com.devgoo.commons.util.FileFormats;
-
-import java.io.File;
+import com.devgoo.commons.wrapper.PhatFile;
 
 /**
  * Created by madimetja on 2016/09/02.
@@ -11,10 +10,19 @@ public interface WriterInterface {
 	/**
 	 * Write a string to a {@link java.io.File}
 	 *
-	 * @param fileContent the string which is to be written to the file
+	 * @param content the string which is to be written to the file
 	 * @param absoluteFilePath the path where the file will be saved
-	 * @param outputFileFormat output format {e.g: csv, json}
-	 * @return
+	 * @param output output format {e.g: csv, json, txt}
+	 * @return {@link PhatFile} which extends {@link java.io.File}
 	 */
-	File writeToFile(String fileContent, String absoluteFilePath, FileFormats outputFileFormat);
+	PhatFile writeToFile(String content, String absoluteFilePath, FileFormats output);
+
+	/**
+	 * Write a string to a {@link java.io.File}
+	 *
+	 * @param content the string which is to be written to the file
+	 * @param output output format {e.g: csv, json, txt}
+	 * @return {@link PhatFile} which extends {@link java.io.File}
+	 */
+	PhatFile writeToFile(String content, FileFormats output);
 }
