@@ -1,13 +1,16 @@
 package com.devgoo.commons.wrapper;
 
+import com.devgoo.commons.util.FileFormats;
+
 /**
  * Created by madimetja on 2016/09/02.
  */
 public class PhatFile extends java.io.File {
 	private final java.io.File file;
+	private FileFormats format;
 
 	/**
-	 * Default constructor
+	 * Default constructor for {@link java.io.File}
 	 * @param pathname path to the file
 	 */
 	public PhatFile(String pathname) {
@@ -16,7 +19,7 @@ public class PhatFile extends java.io.File {
 	}
 
 	/**
-	 * Default constructor
+	 * Default constructor for {@link java.io.File}
 	 * @param parent {@link String}
 	 * @param child {@link String}
 	 */
@@ -26,7 +29,7 @@ public class PhatFile extends java.io.File {
 	}
 
 	/**
-	 * Default constructor
+	 * Default constructor for {@link java.io.File}
 	 * @param parent {@link java.io.File}
 	 * @param child {@link java.io.File}
 	 */
@@ -36,7 +39,7 @@ public class PhatFile extends java.io.File {
 	}
 
 	/**
-	 * Default constructor {@link java.io.File}
+	 * Default constructor for {@link java.io.File}
 	 * @param uri path to the file
 	 */
 	public PhatFile(java.net.URI uri) {
@@ -51,5 +54,9 @@ public class PhatFile extends java.io.File {
 	 */
 	public String getContentAsString() throws java.io.FileNotFoundException {
 		return new java.util.Scanner(this.file).useDelimiter("\\Z").next();
+	}
+
+	public FileFormats getFormat() {
+		return format;
 	}
 }

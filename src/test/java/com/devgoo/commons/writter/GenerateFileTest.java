@@ -25,7 +25,7 @@ public class GenerateFileTest {
 
 	@Test
 	public void writeTxtFile() {
-		String content = "Hello World";
+		String content = "Hello World, how are you World ?";
 
 		PhatFile file = writer.writeToFile(content, FileFormats.TXT);
 
