@@ -10,9 +10,6 @@ import com.devgoo.commons.wrapper.PhatFile;
  * Created by chrismipi on 2016/09/02.
  */
 public class Writer implements WriterInterface {
-	private static final String TXT = ".txt";
-	private static final String CSV = ".csv";
-	private static final String JSON = ".json";
 
 	@Override
 	public PhatFile writeToFile(String name, String fileContent, String absoluteFilePath, FileFormats outputFileFormat) {
@@ -26,14 +23,14 @@ public class Writer implements WriterInterface {
 
 		switch(output) {
 			case TXT:
-				f = java.io.File.createTempFile(name, TXT);
-				properName = name + TXT;
+				f = java.io.File.createTempFile(name, FileFormats.TXT.getExtension());
+				properName = name + FileFormats.TXT.getExtension();
 				break;
 			case JSON:
 				ValidatorInterface v = new Validators();
 				if(v.validate(content.trim(), output)) {
-					f = java.io.File.createTempFile(name, JSON);
-					properName = name + JSON;
+					f = java.io.File.createTempFile(name, FileFormats.JSON.getExtension());
+					properName = name + FileFormats.JSON.getExtension();
 				}
 				else throw new InvalidFileFormatException("The JSON content is not valid.");
 				break;
