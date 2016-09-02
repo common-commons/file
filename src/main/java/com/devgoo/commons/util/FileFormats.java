@@ -6,5 +6,6 @@ package com.devgoo.commons.util;
 public enum FileFormats {
 	TXT,
 	CSV,
-	JSON
+	JSON,
+	XML
 }
