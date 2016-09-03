@@ -17,6 +17,8 @@ public class Validators implements ValidatorInterface {
 		switch (format) {
 			case JSON:
 				return validateJsonFormat(content);
+			case CSV:
+				return validateCsvFormat(content);
 			default:
 				return false;
 		}
@@ -41,5 +43,28 @@ public class Validators implements ValidatorInterface {
 			}
 		}
 		return true;
+	}
+
+	/**
+	 * Validates that the given content is valid csv format.
+	 *
+	 * The function will attempt to determine the delimiter used.
+	 * If it can't be picked up, the file will be invalidated,
+	 *
+	 * @param content The content to be validated.
+	 *
+	 * @return Returns a boolean value representing the validity
+	 * of the file.
+	 */
+	private boolean validateCsvFormat(String content) {
+
+		try{
+
+
+
+		} catch (Exception e){
+
+		}
+
 	}
 }
