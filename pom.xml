@@ -5,8 +5,8 @@
   <artifactId>file</artifactId>
   <packaging>jar</packaging>
   <version>0.1</version>
-  <name>file</name>
-  <url>http://maven.apache.org</url>
+  <name>Common-Commons</name>
+  <url>http://devgoo.com, http://operadev.com</url>
 
   <dependencies>
     <dependency>
