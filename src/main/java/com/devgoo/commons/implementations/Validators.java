@@ -46,6 +46,9 @@ public class Validators implements ValidatorInterface {
 	}
 
 	/**
+	 *
+	 * TODO - Complete implementation of this function.
+	 *
 	 * Validates that the given content is valid csv format.
 	 *
 	 * The function will attempt to determine the delimiter used.
@@ -60,10 +63,10 @@ public class Validators implements ValidatorInterface {
 
 		try{
 
-
+			return false;
 
 		} catch (Exception e){
-
+			return false;
 		}
 
 	}
