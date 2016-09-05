@@ -12,7 +12,7 @@ import static org.junit.Assert.assertTrue;
 /**
  * Created by madimetja on 2016/09/02.
  */
-public class ValidatorTest {
+public class JsonValidatorTest {
 	private ValidatorInterface validator;
 
 	@Before

@@ -6,10 +6,13 @@ import com.devgoo.commons.interfaces.ValidatorInterface;
 import com.devgoo.commons.interfaces.WriterInterface;
 import com.devgoo.commons.util.FileFormats;
 import com.devgoo.commons.wrapper.PhatFile;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.io.IOException;
 
 import static com.devgoo.commons.util.FileFormats.JSON;
+import static com.devgoo.commons.util.FileFormats.XML;
 
 ;
 
@@ -17,6 +20,7 @@ import static com.devgoo.commons.util.FileFormats.JSON;
  * Created by chrismipi on 2016/09/02.
  */
 public class Writer implements WriterInterface {
+	private Logger logger = LoggerFactory.getLogger(getClass().getName());
 
 	@Override
 	public PhatFile writeToFile(FileFormats output, String content, String absoluteFilePath) throws InvalidFileFormatException, java.io.IOException, UnknownFileFormatException {
@@ -29,9 +33,13 @@ public class Writer implements WriterInterface {
 			case JSON:
 				validateJson(content);
 				f = new java.io.File(absoluteFilePath);
-
+				break;
+			case XML:
+				validateXml(content);
+				f = new java.io.File(absoluteFilePath);
 				break;
 			default:
+				logger.error("File extension :> " + output.getExtension() + " is not Supported.");
 				throw new InvalidFileFormatException("File format is not Supported.");
 		}
 
@@ -62,10 +70,22 @@ public class Writer implements WriterInterface {
 				f = java.io.File.createTempFile(name, output.getExtension());
 				properName = name + output.getExtension();
 				break;
+			case XML:
+				validateXml(content);
+				f = java.io.File.createTempFile(name, output.getExtension());
+				properName = name + output.getExtension();
+				break;
 			default:
+				logger.error("File extension :> " + output.getExtension() + " is not Supported.");
 				throw new InvalidFileFormatException("File format is not Supported.");
 		}
 		return createFile(f, content, properName, output);
+	}
+
+	private void validateXml(String content) throws InvalidFileFormatException {
+		final ValidatorInterface v = new Validators();
+		if(!v.validate(content.trim(), XML))
+			throw new InvalidFileFormatException("The XML content is not valid.");
 	}
 
 	private PhatFile createFile(java.io.File f, String content, String properName, FileFormats output) throws IOException {
