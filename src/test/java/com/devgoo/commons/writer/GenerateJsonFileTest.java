@@ -1,11 +1,15 @@
 package com.devgoo.commons.writer;
 
+import com.devgoo.commons.exceptions.IllegalPhatFileWriting;
 import com.devgoo.commons.exceptions.InvalidFileFormatException;
 import com.devgoo.commons.exceptions.UnknownFileFormatException;
 import com.devgoo.commons.implementations.Writer;
 import com.devgoo.commons.interfaces.WriterInterface;
 import com.devgoo.commons.util.FileFormats;
 import com.devgoo.commons.wrapper.PhatFile;
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -79,6 +83,70 @@ public class GenerateJsonFileTest {
 			assertEquals(FileFormats.JSON, file.getFormat());
 			assertEquals(content, file.getContentAsString());
 		} catch (UnknownFileFormatException | IOException | InvalidFileFormatException e) {
+			fail(e.getLocalizedMessage());
+		}
+	}
+
+	@Test
+	public void writeJsonObjectToJsonFile() {
+		try {
+			String content = "{\"message\":\"Hello World, how are you World ?\"}";
+			JSONObject json = new JSONObject(content);
+
+			PhatFile file = writer.writeToFile("stuff", json, FileFormats.JSON);
+
+			assertEquals("stuff.json", file.getName());
+			assertEquals(content, file.getContentAsString());
+			assertEquals(FileFormats.JSON, file.getFormat());
+		} catch (JSONException | IOException | IllegalPhatFileWriting e) {
+			fail(e.getLocalizedMessage());
+		}
+	}
+
+	@Test
+	public void writeJsonObjectToTxtFile() {
+		try {
+			String content = "{\"message\":\"Hello World, how are you World ?\"}";
+			JSONObject json = new JSONObject(content);
+
+			PhatFile file = writer.writeToFile("stuff", json, FileFormats.TXT);
+
+			assertEquals("stuff.txt", file.getName());
+			assertEquals(content, file.getContentAsString());
+			assertEquals(FileFormats.TXT, file.getFormat());
+		} catch (JSONException | IOException | IllegalPhatFileWriting e) {
+			fail(e.getLocalizedMessage());
+		}
+	}
+
+	@Test
+	public void writeJsonArrayToJsonFile() {
+		try {
+			String content = "[\"message\",\"I am going home\",\"message\",\"Hello World, how are you World ?\",\"message\",\"I was drinking Vodka\"]";
+			JSONArray json = new JSONArray(content);
+
+			PhatFile file = writer.writeToFile("stuff", json, FileFormats.JSON);
+
+			assertEquals("stuff.json", file.getName());
+			assertEquals(content, file.getContentAsString());
+			assertEquals(FileFormats.JSON, file.getFormat());
+		} catch (JSONException | IOException | IllegalPhatFileWriting e) {
+			fail(e.getLocalizedMessage());
+		}
+	}
+
+	@Test
+	public void writeJsonArrayToTxtFile() {
+		try {
+			String content = "[\"message\",\"I am going home\",\"message\",\"Hello World, how are you World ?\",\"message\",\"I was drinking Vodka\"]";
+			JSONArray json = new JSONArray(content);
+
+			PhatFile file = writer.writeToFile("stuff", json, FileFormats.TXT);
+
+			assertEquals("stuff.txt", file.getName());
+			assertEquals(content, file.getContentAsString());
+			assertEquals(FileFormats.TXT, file.getFormat());
+		} catch (JSONException | IOException | IllegalPhatFileWriting e) {
 			fail(e.getLocalizedMessage());
 		}
 	}
