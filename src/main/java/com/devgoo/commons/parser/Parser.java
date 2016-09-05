@@ -105,7 +105,7 @@ public class Parser implements ParserInterface {
 		if(validators.validate(jsonFile.getContentAsString(), fileFormat)){
 			return jsonFile;
 		}else{
-			throw new InvalidFileFormatException("The given file is not valid JSON.");
+			throw new InvalidFileFormatException("The given file is not valid " + fileFormat + " format.");
 		}
 	}
 }
