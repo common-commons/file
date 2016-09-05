@@ -13,7 +13,7 @@ import org.json.JSONObject;
 import java.io.IOException;
 
 /**
- * Concrete Parser Class. This class implemets the contract specified by
+ * Concrete Parser Class. This class implements the contract specified by
  * the Parser Interface.
  *
  * Created by madimetja on 2016/09/02.
@@ -31,9 +31,11 @@ public class Parser implements ParserInterface {
 				return parseJsonFile(absoluteFilePath);
 			case CSV:
 				return parseCsvFile(absoluteFilePath);
+			case XML:
+				return parseXmlFile(absoluteFilePath);
+			default:
+				throw new UnknownFileFormatException("Unsupported file version.");
 		}
-
-		throw new UnknownFileFormatException("");
 	}
 
 	/**
@@ -62,16 +64,7 @@ public class Parser implements ParserInterface {
 	 * @return Returns the file parsed into a PhatFile.
 	 */
 	private PhatFile parseJsonFile(String absoluteFilePath) throws IOException, InvalidFileFormatException {
-
-		PhatFile jsonFile = new PhatFile(absoluteFilePath);
-
-		//validate the file content. If this line does not throw
-		//an exception, then the content is valid JSON.
-		if(validators.validate(jsonFile.getContentAsString(), FileFormats.JSON)){
-			return jsonFile;
-		}else{
-			throw new InvalidFileFormatException("The given file is not valid JSON.");
-		}
+		return validateAndParseFile(absoluteFilePath, FileFormats.JSON);
 	}
 
 	/**
@@ -91,5 +84,28 @@ public class Parser implements ParserInterface {
 	 */
 	private PhatFile parseCsvFile(String absoluteFilePath) {
 		return null;
+	}
+
+	/**
+	 * Parses a given .xml file.
+	 *
+	 * @param absoluteFilePath The absolute path to the .xml file.
+	 *
+	 * @return Returns the file parsed into a PhatFile.
+	 */
+	private PhatFile parseXmlFile(String absoluteFilePath) throws InvalidFileFormatException, IOException {
+		return validateAndParseFile(absoluteFilePath, FileFormats.XML);
+	}
+
+	private PhatFile validateAndParseFile(String absoluteFilePath, FileFormats fileFormat) throws IOException, InvalidFileFormatException {
+		PhatFile jsonFile = new PhatFile(absoluteFilePath);
+
+		//validate the file content. If this line does not throw
+		//an exception, then the content is valid JSON.
+		if(validators.validate(jsonFile.getContentAsString(), fileFormat)){
+			return jsonFile;
+		}else{
+			throw new InvalidFileFormatException("The given file is not valid " + fileFormat + " format.");
+		}
 	}
 }

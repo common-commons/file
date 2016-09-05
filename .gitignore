@@ -4,6 +4,7 @@
 .mtj.tmp/
 .idea/workspace.xml
 .idea/uiDesigner.xml
+.idea/dictionaries/*
 target/
 **.iml
 **/*DS_Store
