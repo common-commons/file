@@ -23,5 +23,4 @@ public interface ParserInterface {
 	 * @return Returns a PhatFile instance of the file parsed.
 	 */
 	PhatFile parseFile(String absoluteFilePath, FileFormats fileFormat) throws UnknownFileFormatException, IOException, InvalidFileFormatException;
-
 }

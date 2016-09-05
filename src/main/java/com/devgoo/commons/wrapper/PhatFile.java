@@ -1,6 +1,11 @@
 package com.devgoo.commons.wrapper;
 
+import com.devgoo.commons.exceptions.InvalidFileFormatException;
 import com.devgoo.commons.util.FileFormats;
+import org.xml.sax.SAXException;
+
+import javax.xml.parsers.ParserConfigurationException;
+import java.io.IOException;
 
 /**
  * Created by madimetja on 2016/09/02.
@@ -73,5 +78,43 @@ public class PhatFile extends java.io.File {
 
 	public void setName(String name) {
 		this.name = name;
+	}
+
+	/**
+	 * Returns the file object as an org.json.JSONObject.
+	 *
+	 * @return org.json.JSONObject.
+	 * @throws InvalidFileFormatException
+	 */
+	public org.json.JSONObject getAsJsonObject() throws InvalidFileFormatException {
+
+		if(this.format.equals(FileFormats.JSON)){
+			return new org.json.JSONObject(this);
+		}else{
+			throw new InvalidFileFormatException("The given file of type " + this.format + " cannot be returned as org.json.JSONObject.");
+		}
+	}
+
+	/**
+	 * Returns the file object as an org.w3c.dom.Document.
+	 *
+	 * @return org.w3c.dom.Document.
+	 *
+	 * @throws InvalidFileFormatException
+	 * @throws ParserConfigurationException
+	 * @throws IOException
+	 * @throws SAXException
+	 */
+	public org.w3c.dom.Document getAsDocument() throws InvalidFileFormatException, ParserConfigurationException, IOException, SAXException {
+
+		if (this.format.equals(FileFormats.XML)) {
+			javax.xml.parsers.DocumentBuilderFactory factory = javax.xml.parsers.DocumentBuilderFactory.newInstance();
+			factory.setValidating(false);
+			factory.setNamespaceAware(true);
+			javax.xml.parsers.DocumentBuilder builder = factory.newDocumentBuilder();
+			return builder.parse(this);
+		} else {
+			throw new InvalidFileFormatException("The given file of type " + this.format + " cannot be returned as org.w3c.dom.Document.");
+		}
 	}
 }
