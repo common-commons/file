@@ -1,11 +1,16 @@
 package com.devgoo.commons.implementations;
 
+import com.devgoo.commons.exceptions.IllegalPhatFileWriting;
 import com.devgoo.commons.exceptions.InvalidFileFormatException;
 import com.devgoo.commons.exceptions.UnknownFileFormatException;
 import com.devgoo.commons.interfaces.ValidatorInterface;
 import com.devgoo.commons.interfaces.WriterInterface;
 import com.devgoo.commons.util.FileFormats;
 import com.devgoo.commons.wrapper.PhatFile;
+import org.json.JSONArray;
+import org.json.JSONObject;
+
+import java.io.IOException;
 
 import static com.devgoo.commons.util.FileFormats.JSON;
 import static com.devgoo.commons.util.FileFormats.XML;
@@ -79,6 +84,43 @@ public class Writer implements WriterInterface {
 				throw new InvalidFileFormatException("File format is not Supported.");
 		}
 		return createFile(f, content, properName, output);
+	}
+
+	@Override
+	public PhatFile writeToFile(String name, JSONObject content, FileFormats output) throws IllegalPhatFileWriting, IOException {
+		java.io.File f;
+		String properName;
+
+		switch (output) {
+			case JSON:
+			case TXT:
+				f = java.io.File.createTempFile(name, output.getExtension());
+				properName = name + output.getExtension();
+				break;
+			default:
+				throw new IllegalPhatFileWriting("Cannot write the content to an extension " + output.getName());
+		}
+
+		return createFile(f, content.toString(), properName, output);
+	}
+
+	@Override
+	public PhatFile writeToFile(String name, JSONArray content, FileFormats output) throws IOException, IllegalPhatFileWriting {
+		java.io.File f;
+		String properName;
+
+		switch (output) {
+			case JSON:
+			case TXT:
+				f = java.io.File.createTempFile(name, output.getExtension());
+				properName = name + output.getExtension();
+				break;
+
+			default:
+				throw new IllegalPhatFileWriting("Cannot write the content to an extension " + output.getName());
+		}
+
+		return createFile(f, content.toString(), properName, output);
 	}
 
 	/**
