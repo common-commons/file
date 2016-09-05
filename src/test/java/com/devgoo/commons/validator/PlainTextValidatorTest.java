@@ -22,10 +22,9 @@ public class PlainTextValidatorTest {
 
 	private ValidatorInterface validator;
 
-	private final String PATH_TO_VALID_XML_FILE = "files/validator/validXmlFile.xml";
-	private final String PATH_TO_VALID_XML_FILE_WITH_ATTRIBUTES = "files/validator/validXmlFileWithAttributes.xml";
-	private final String PATH_TO_EMPTY_XML_FILE = "files/validator/emptyXmlFile.xml";
-	private final String PATH_TO_INVALID_XML_FILE = "files/validator/invalidXmlFile.xml";
+	private final String PATH_TO_EMPTY_TEXT_FILE = "files/validator/plainTextFileOne.txt";
+	private final String PATH_TO_SIMPLE_TEXT_FILE = "files/validator/plainTextFileThree";
+	private final String PATH_TO_COMPLEX_TEXT_FILE = "files/validator/plainTextFileTwo.txt";
 
 	@Before
 	public void setUp() {
@@ -33,27 +32,39 @@ public class PlainTextValidatorTest {
 		validator = new Validators();
 	}
 
+	/**
+	 * Ensures that an empty text file can be parsed successfully.
+	 *
+	 * @throws IOException
+	 * @throws UnknownFileFormatException
+	 */
 	@Test
-	public void testThatValidXmlIsReadCorrectly() throws IOException, UnknownFileFormatException {
-		PhatFile testFile = new PhatFile(classLoader.getResource(PATH_TO_VALID_XML_FILE).getPath());
-		assertTrue(validator.validate(testFile.getContentAsString(), FileFormats.XML));
+	public void testThatEmptyPlainTextFileIsSeenAsValid() throws IOException, UnknownFileFormatException {
+		PhatFile testFile = new PhatFile(classLoader.getResource(PATH_TO_EMPTY_TEXT_FILE).getPath());
+		assertTrue(validator.validate(testFile.getContentAsString(), FileFormats.TXT));
 	}
 
+	/**
+	 * Ensures that a text file with a single line can be parsed successfully.
+	 *
+	 * @throws IOException
+	 * @throws UnknownFileFormatException
+	 */
 	@Test
-	public void testThatValidXmlWithAttributesIsReadCorrectly() throws IOException, UnknownFileFormatException {
-		PhatFile testFile = new PhatFile(classLoader.getResource(PATH_TO_VALID_XML_FILE_WITH_ATTRIBUTES).getPath());
-		assertTrue(validator.validate(testFile.getContentAsString(), FileFormats.XML));
+	public void testThatSimplePlainTextFileSeenAsValid() throws IOException, UnknownFileFormatException {
+		PhatFile testFile = new PhatFile(classLoader.getResource(PATH_TO_SIMPLE_TEXT_FILE).getPath());
+		assertTrue(validator.validate(testFile.getContentAsString(), FileFormats.TXT));
 	}
 
+	/**
+	 * Ensures that a text file with multiple paragraphs can be parsed successfully.
+	 *
+	 * @throws IOException
+	 * @throws UnknownFileFormatException
+	 */
 	@Test
-	public void testThatAnEmptyFileIsRejected() throws IOException, UnknownFileFormatException {
-		PhatFile testFile = new PhatFile(classLoader.getResource(PATH_TO_EMPTY_XML_FILE).getPath());
-		assertFalse(validator.validate(testFile.getContentAsString(), FileFormats.XML));
-	}
-
-	@Test
-	public void testThatInvalidXmlIsRejected() throws IOException, UnknownFileFormatException {
-		PhatFile testFile = new PhatFile(classLoader.getResource(PATH_TO_INVALID_XML_FILE).getPath());
-		assertFalse(validator.validate(testFile.getContentAsString(), FileFormats.XML));
+	public void testThatComplexPlainTextFileSeenAsValid() throws IOException, UnknownFileFormatException {
+		PhatFile testFile = new PhatFile(classLoader.getResource(PATH_TO_COMPLEX_TEXT_FILE).getPath());
+		assertTrue(validator.validate(testFile.getContentAsString(), FileFormats.TXT));
 	}
 }

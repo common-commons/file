@@ -41,14 +41,14 @@ public class Writer implements WriterInterface {
 		return createFile(f, content, null,output);
 	}
 
-	private void validateJson(String content) throws InvalidFileFormatException {
+	private void validateJson(String content) throws InvalidFileFormatException, UnknownFileFormatException {
 		final ValidatorInterface v = new Validators();
 		if(!v.validate(content.trim(), JSON))
 			throw new InvalidFileFormatException("The JSON content is not valid.");
 	}
 
 	@Override
-	public PhatFile writeToFile(String name, String content, FileFormats output) throws java.io.IOException, InvalidFileFormatException {
+	public PhatFile writeToFile(String name, String content, FileFormats output) throws java.io.IOException, InvalidFileFormatException, UnknownFileFormatException {
 		java.io.File f;
 		String properName;
 

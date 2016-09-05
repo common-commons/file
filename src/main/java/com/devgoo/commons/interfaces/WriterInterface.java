@@ -28,5 +28,5 @@ public interface WriterInterface {
 	 * @param output output format {e.g: csv, json, txt}
 	 * @return {@link PhatFile} which extends {@link java.io.File}
 	 */
-	PhatFile writeToFile(String name, String content, FileFormats output) throws IOException, InvalidFileFormatException;
+	PhatFile writeToFile(String name, String content, FileFormats output) throws IOException, InvalidFileFormatException, UnknownFileFormatException;
 }
