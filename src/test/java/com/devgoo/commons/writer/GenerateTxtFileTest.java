@@ -18,7 +18,7 @@ import static org.junit.Assert.*;
 /**
  * Created by madimetja on 2016/09/02.
  */
-public class GenerateFileTest {
+public class GenerateTxtFileTest {
 	private WriterInterface writer;
 	private ClassLoader classLoader;
 
@@ -66,36 +66,6 @@ public class GenerateFileTest {
 			assertEquals(content, file.getContentAsString());
 		} catch (UnknownFileFormatException | IOException | InvalidFileFormatException e) {
 			fail(e.getLocalizedMessage());
-		}
-	}
-
-	@Test
-	public void writeCorrectJSONFile() {
-		try {
-			String content = "{\"message\":\"Hello World, how are you World ?\"}";
-
-			PhatFile file = writer.writeToFile("output", content, FileFormats.JSON);
-
-			assertTrue(file.exists());
-
-			assertEquals("output.json", file.getName());
-			assertEquals(FileFormats.JSON, file.getFormat());
-			assertEquals(content, file.getContentAsString());
-		} catch (IOException | InvalidFileFormatException e) {
-			fail(e.getLocalizedMessage());
-		}
-	}
-
-	@Test
-	public void writeInCorrectJSONFile() {
-		try {
-			String content = "{\"message\":Hello World, how are you World ?\"}";
-
-			writer.writeToFile("output", content, FileFormats.JSON);
-
-			fail("Not supposed to pass, JSON is incorrect.");
-		} catch (IOException | InvalidFileFormatException e) {
-			assertEquals("The JSON content is not valid.", e.getLocalizedMessage());
 		}
 	}
 }
