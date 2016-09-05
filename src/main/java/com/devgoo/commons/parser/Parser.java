@@ -6,9 +6,6 @@ import com.devgoo.commons.implementations.Validators;
 import com.devgoo.commons.interfaces.ParserInterface;
 import com.devgoo.commons.util.FileFormats;
 import com.devgoo.commons.wrapper.PhatFile;
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
 
 import java.io.IOException;
 

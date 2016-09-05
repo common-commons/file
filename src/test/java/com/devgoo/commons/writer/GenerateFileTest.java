@@ -31,7 +31,7 @@ public class GenerateFileTest {
 	}
 
 	@Test
-	public void writeTxtFile() {
+	public void writeTxtFile() throws UnknownFileFormatException {
 		try {
 			String content = "Hello World, how are you World ?";
 
@@ -70,7 +70,7 @@ public class GenerateFileTest {
 	}
 
 	@Test
-	public void writeCorrectJSONFile() {
+	public void writeCorrectJSONFile() throws UnknownFileFormatException {
 		try {
 			String content = "{\"message\":\"Hello World, how are you World ?\"}";
 
@@ -87,7 +87,7 @@ public class GenerateFileTest {
 	}
 
 	@Test
-	public void writeInCorrectJSONFile() {
+	public void writeInCorrectJSONFile() throws UnknownFileFormatException {
 		try {
 			String content = "{\"message\":Hello World, how are you World ?\"}";
 

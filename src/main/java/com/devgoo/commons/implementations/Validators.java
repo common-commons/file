@@ -4,14 +4,6 @@ import com.devgoo.commons.exceptions.UnknownFileFormatException;
 import com.devgoo.commons.interfaces.ValidatorInterface;
 import com.devgoo.commons.util.FileFormats;
 import com.devgoo.commons.util.SimpleErrorHandler;
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
-import org.w3c.dom.Document;
-
-import javax.xml.parsers.DocumentBuilder;
-import javax.xml.parsers.DocumentBuilderFactory;
-import java.io.StringBufferInputStream;
 
 /**
  * Created by chrismipi on 2016/09/02.
@@ -46,11 +38,11 @@ public class Validators implements ValidatorInterface {
 	 */
 	private boolean validateJsonFormat(String content){
 		try {
-			new JSONObject(content.trim());
-		} catch (JSONException ex) {
+			new org.json.JSONObject(content.trim());
+		} catch (org.json.JSONException ex) {
 			try {
-				new JSONArray(content.trim());
-			} catch (JSONException ex1) {
+				new org.json.JSONArray(content.trim());
+			} catch (org.json.JSONException ex1) {
 				return false;
 			}
 		}
@@ -58,7 +50,6 @@ public class Validators implements ValidatorInterface {
 	}
 
 	/**
-	 *
 	 * TODO - Complete implementation of this function.
 	 *
 	 * Validates that the given content is valid csv format.
@@ -84,9 +75,6 @@ public class Validators implements ValidatorInterface {
 	}
 
 	/**
-	 *
-	 * TODO - Complete implementation of this function.
-	 *
 	 * Validates that the given content is valid xml format.
 	 *
 	 * @param content The content to be validated.
@@ -97,14 +85,14 @@ public class Validators implements ValidatorInterface {
 	private boolean validateXmlFormat(String content) {
 
 		try{
-			DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
+			javax.xml.parsers.DocumentBuilderFactory factory = javax.xml.parsers.DocumentBuilderFactory.newInstance();
 			factory.setValidating(false);
 			factory.setNamespaceAware(true);
 
-			DocumentBuilder builder = factory.newDocumentBuilder();
+			javax.xml.parsers.DocumentBuilder builder = factory.newDocumentBuilder();
 
 			builder.setErrorHandler(new SimpleErrorHandler());
-			Document document = builder.parse(new StringBufferInputStream(content));
+			builder.parse(new java.io.StringBufferInputStream(content));
 
 			return true;
 		} catch (Exception e){
