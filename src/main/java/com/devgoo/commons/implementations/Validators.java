@@ -1,5 +1,6 @@
 package com.devgoo.commons.implementations;
 
+import com.devgoo.commons.exceptions.UnknownFileFormatException;
 import com.devgoo.commons.interfaces.ValidatorInterface;
 import com.devgoo.commons.util.FileFormats;
 import com.devgoo.commons.util.SimpleErrorHandler;
@@ -18,9 +19,12 @@ import java.io.StringBufferInputStream;
 public class Validators implements ValidatorInterface {
 
 	@Override
-	public boolean validate(String content, FileFormats format) {
+	public boolean validate(String content, FileFormats format) throws UnknownFileFormatException {
 		if(content == null) return false;
 		switch (format) {
+			case TXT:
+				//Plain text files can have content of any form.
+				return true;
 			case JSON:
 				return validateJsonFormat(content);
 			case CSV:
@@ -28,7 +32,7 @@ public class Validators implements ValidatorInterface {
 			case XML:
 				return validateXmlFormat(content);
 			default:
-				return false;
+				throw new UnknownFileFormatException("The file type provided is not supported.");
 		}
 	}
 

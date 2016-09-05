@@ -1,9 +1,13 @@
 package com.devgoo.commons.parser;
 
+import com.devgoo.commons.exceptions.InvalidFileFormatException;
+import com.devgoo.commons.exceptions.UnknownFileFormatException;
 import com.devgoo.commons.util.FileFormats;
 import com.devgoo.commons.wrapper.PhatFile;
 import org.junit.Before;
 import org.junit.Test;
+
+import java.io.IOException;
 
 import static org.junit.Assert.*;
 
@@ -30,19 +34,13 @@ public class PlainTextParserTest {
 	 * and that the parsed content is accurate.
 	 */
 	@Test
-	public void testParseTextFile(){
-		try{
-			PhatFile plainTextFile = parser.parseFile(classLoader.getResource(PATH_TO_TEXT_FILE).getPath(), FileFormats.TXT);
+	public void testParseTextFile() throws UnknownFileFormatException, IOException, InvalidFileFormatException {
+		PhatFile plainTextFile = parser.parseFile(classLoader.getResource(PATH_TO_TEXT_FILE).getPath(), FileFormats.TXT);
 
-			assertNotNull(plainTextFile);
+		assertNotNull(plainTextFile);
 
-			assertEquals(plainTextFile.getContentAsString(), "This is a random TeXt FilE WitH RanDoM Data.\n" +
-				"It should be parsed well if the logic to parse\n" +
-				"plain text files works properly....");
-
-		} catch (Exception e){
-			e.printStackTrace();
-			fail(e.getLocalizedMessage());
-		}
+		assertEquals(plainTextFile.getContentAsString(), "This is a random TeXt FilE WitH RanDoM Data.\n" +
+			"It should be parsed well if the logic to parse\n" +
+			"plain text files works properly....");
 	}
 }

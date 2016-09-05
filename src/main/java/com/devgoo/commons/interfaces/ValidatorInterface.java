@@ -1,5 +1,6 @@
 package com.devgoo.commons.interfaces;
 
+import com.devgoo.commons.exceptions.UnknownFileFormatException;
 import com.devgoo.commons.util.FileFormats;
 
 /**
@@ -13,5 +14,5 @@ public interface ValidatorInterface {
 	 * @param format the format of the content {@link FileFormats}
 	 * @return returns either true of false
 	 */
-	boolean validate(String content, FileFormats format);
+	boolean validate(String content, FileFormats format) throws UnknownFileFormatException;
 }

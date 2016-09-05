@@ -63,7 +63,7 @@ public class Parser implements ParserInterface {
 	 *
 	 * @return Returns the file parsed into a PhatFile.
 	 */
-	private PhatFile parseJsonFile(String absoluteFilePath) throws IOException, InvalidFileFormatException {
+	private PhatFile parseJsonFile(String absoluteFilePath) throws IOException, InvalidFileFormatException, UnknownFileFormatException {
 		return validateAndParseFile(absoluteFilePath, FileFormats.JSON);
 	}
 
@@ -93,11 +93,11 @@ public class Parser implements ParserInterface {
 	 *
 	 * @return Returns the file parsed into a PhatFile.
 	 */
-	private PhatFile parseXmlFile(String absoluteFilePath) throws InvalidFileFormatException, IOException {
+	private PhatFile parseXmlFile(String absoluteFilePath) throws InvalidFileFormatException, IOException, UnknownFileFormatException {
 		return validateAndParseFile(absoluteFilePath, FileFormats.XML);
 	}
 
-	private PhatFile validateAndParseFile(String absoluteFilePath, FileFormats fileFormat) throws IOException, InvalidFileFormatException {
+	private PhatFile validateAndParseFile(String absoluteFilePath, FileFormats fileFormat) throws IOException, InvalidFileFormatException, UnknownFileFormatException {
 		PhatFile jsonFile = new PhatFile(absoluteFilePath);
 
 		//validate the file content. If this line does not throw
