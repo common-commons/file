@@ -5,9 +5,12 @@ import com.devgoo.commons.implementations.Validators;
 import com.devgoo.commons.interfaces.ValidatorInterface;
 import com.devgoo.commons.util.FileFormats;
 import com.devgoo.commons.wrapper.PhatFile;
+import org.json.JSONException;
 import org.junit.Before;
 import org.junit.Test;
+import org.xml.sax.SAXException;
 
+import javax.xml.parsers.ParserConfigurationException;
 import java.io.IOException;
 
 import static org.junit.Assert.assertFalse;
@@ -39,7 +42,7 @@ public class PlainTextValidatorTest {
 	 * @throws UnknownFileFormatException
 	 */
 	@Test
-	public void testThatEmptyPlainTextFileIsSeenAsValid() throws IOException, UnknownFileFormatException {
+	public void testThatEmptyPlainTextFileIsSeenAsValid() throws IOException, UnknownFileFormatException, ParserConfigurationException, SAXException, JSONException {
 		PhatFile testFile = new PhatFile(classLoader.getResource(PATH_TO_EMPTY_TEXT_FILE).getPath());
 		assertTrue(validator.validate(testFile.getContentAsString(), FileFormats.TXT));
 	}
@@ -51,7 +54,7 @@ public class PlainTextValidatorTest {
 	 * @throws UnknownFileFormatException
 	 */
 	@Test
-	public void testThatSimplePlainTextFileSeenAsValid() throws IOException, UnknownFileFormatException {
+	public void testThatSimplePlainTextFileSeenAsValid() throws IOException, UnknownFileFormatException, ParserConfigurationException, SAXException, JSONException {
 		PhatFile testFile = new PhatFile(classLoader.getResource(PATH_TO_SIMPLE_TEXT_FILE).getPath());
 		assertTrue(validator.validate(testFile.getContentAsString(), FileFormats.TXT));
 	}
@@ -63,7 +66,7 @@ public class PlainTextValidatorTest {
 	 * @throws UnknownFileFormatException
 	 */
 	@Test
-	public void testThatComplexPlainTextFileSeenAsValid() throws IOException, UnknownFileFormatException {
+	public void testThatComplexPlainTextFileSeenAsValid() throws IOException, UnknownFileFormatException, ParserConfigurationException, SAXException, JSONException {
 		PhatFile testFile = new PhatFile(classLoader.getResource(PATH_TO_COMPLEX_TEXT_FILE).getPath());
 		assertTrue(validator.validate(testFile.getContentAsString(), FileFormats.TXT));
 	}

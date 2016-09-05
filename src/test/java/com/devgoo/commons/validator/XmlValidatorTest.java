@@ -5,9 +5,12 @@ import com.devgoo.commons.implementations.Validators;
 import com.devgoo.commons.interfaces.ValidatorInterface;
 import com.devgoo.commons.util.FileFormats;
 import com.devgoo.commons.wrapper.PhatFile;
+import org.json.JSONException;
 import org.junit.Before;
 import org.junit.Test;
+import org.xml.sax.SAXException;
 
+import javax.xml.parsers.ParserConfigurationException;
 import java.io.IOException;
 
 import static org.junit.Assert.*;
@@ -33,25 +36,25 @@ public class XmlValidatorTest {
 	}
 
 	@Test
-	public void testThatValidXmlIsReadCorrectly() throws IOException, UnknownFileFormatException {
+	public void testThatValidXmlIsReadCorrectly() throws IOException, UnknownFileFormatException, ParserConfigurationException, SAXException, JSONException {
 		PhatFile testFile = new PhatFile(classLoader.getResource(PATH_TO_VALID_XML_FILE).getPath());
 		assertTrue(validator.validate(testFile.getContentAsString(), FileFormats.XML));
 	}
 
 	@Test
-	public void testThatValidXmlWithAttributesIsReadCorrectly() throws IOException, UnknownFileFormatException {
+	public void testThatValidXmlWithAttributesIsReadCorrectly() throws IOException, UnknownFileFormatException, ParserConfigurationException, SAXException, JSONException {
 		PhatFile testFile = new PhatFile(classLoader.getResource(PATH_TO_VALID_XML_FILE_WITH_ATTRIBUTES).getPath());
 		assertTrue(validator.validate(testFile.getContentAsString(), FileFormats.XML));
 	}
 
 	@Test
-	public void testThatAnEmptyFileIsRejected() throws IOException, UnknownFileFormatException {
+	public void testThatAnEmptyFileIsRejected() throws IOException, UnknownFileFormatException, ParserConfigurationException, SAXException, JSONException {
 		PhatFile testFile = new PhatFile(classLoader.getResource(PATH_TO_EMPTY_XML_FILE).getPath());
 		assertFalse(validator.validate(testFile.getContentAsString(), FileFormats.XML));
 	}
 
 	@Test
-	public void testThatInvalidXmlIsRejected() throws IOException, UnknownFileFormatException {
+	public void testThatInvalidXmlIsRejected() throws IOException, UnknownFileFormatException, ParserConfigurationException, SAXException, JSONException {
 		PhatFile testFile = new PhatFile(classLoader.getResource(PATH_TO_INVALID_XML_FILE).getPath());
 		assertFalse(validator.validate(testFile.getContentAsString(), FileFormats.XML));
 	}

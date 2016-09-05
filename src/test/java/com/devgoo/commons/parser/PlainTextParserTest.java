@@ -4,9 +4,12 @@ import com.devgoo.commons.exceptions.InvalidFileFormatException;
 import com.devgoo.commons.exceptions.UnknownFileFormatException;
 import com.devgoo.commons.util.FileFormats;
 import com.devgoo.commons.wrapper.PhatFile;
+import org.json.JSONException;
 import org.junit.Before;
 import org.junit.Test;
+import org.xml.sax.SAXException;
 
+import javax.xml.parsers.ParserConfigurationException;
 import java.io.IOException;
 
 import static org.junit.Assert.*;
@@ -37,7 +40,7 @@ public class PlainTextParserTest {
 	 * and that the parsed content is accurate.
 	 */
 	@Test
-	public void testParseTextFile() throws UnknownFileFormatException, IOException, InvalidFileFormatException {
+	public void testParseTextFile() throws UnknownFileFormatException, IOException, InvalidFileFormatException, ParserConfigurationException, SAXException, JSONException {
 		PhatFile plainTextFile = parser.parseFile(classLoader.getResource(PATH_TO_TEXT_FILE).getPath(), FileFormats.TXT);
 
 		assertNotNull(plainTextFile);
@@ -53,7 +56,7 @@ public class PlainTextParserTest {
 	 * @throws UnknownFileFormatException
 	 */
 	@Test
-	public void testThatEmptyPlainTextFileIsParsedCorrectly() throws IOException, UnknownFileFormatException {
+	public void testThatEmptyPlainTextFileIsParsedCorrectly() throws IOException, UnknownFileFormatException, ParserConfigurationException, SAXException, JSONException {
 		PhatFile testFile = new PhatFile(classLoader.getResource(PATH_TO_EMPTY_TEXT_FILE).getPath());
 		assertNotNull(testFile);
 		assertEquals(testFile.getContentAsString(), "");
@@ -65,7 +68,7 @@ public class PlainTextParserTest {
 	 * @throws UnknownFileFormatException
 	 */
 	@Test
-	public void testThatSimplePlainTextFileIsParsedCorrectly() throws IOException, UnknownFileFormatException {
+	public void testThatSimplePlainTextFileIsParsedCorrectly() throws IOException, UnknownFileFormatException, ParserConfigurationException, SAXException, JSONException {
 		PhatFile testFile = new PhatFile(classLoader.getResource(PATH_TO_SIMPLE_TEXT_FILE).getPath());
 		assertNotNull(testFile);
 		assertEquals(testFile.getContentAsString(), "Hello, My name is World.");
@@ -77,7 +80,7 @@ public class PlainTextParserTest {
 	 * @throws UnknownFileFormatException
 	 */
 	@Test
-	public void testThatComplexPlainTextFileIsParsedCorrectly() throws IOException, UnknownFileFormatException {
+	public void testThatComplexPlainTextFileIsParsedCorrectly() throws IOException, UnknownFileFormatException, ParserConfigurationException, SAXException, JSONException {
 		PhatFile testFile = new PhatFile(classLoader.getResource(PATH_TO_COMPLEX_TEXT_FILE).getPath());
 		assertNotNull(testFile);
 		assertEquals(testFile.getContentAsString(), "Lorem ipsum dolor sit amet, diam adversarium vel ea, velit virtute ut vis, porro aeque sed eu. Sed et consul quidam lucilius, option contentiones eam ad. Ex porro commune vel, solet populo aliquip cu cum. No eum habeo oporteat adipiscing. Fabulas concludaturque eu ius, vis ex illum prompta nostrud. An duo modo animal.\n" +

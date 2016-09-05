@@ -4,9 +4,12 @@ import com.devgoo.commons.exceptions.InvalidFileFormatException;
 import com.devgoo.commons.exceptions.UnknownFileFormatException;
 import com.devgoo.commons.util.FileFormats;
 import com.devgoo.commons.wrapper.PhatFile;
+import org.json.JSONException;
 import org.junit.Before;
 import org.junit.Test;
+import org.xml.sax.SAXException;
 
+import javax.xml.parsers.ParserConfigurationException;
 import java.io.IOException;
 
 import static org.junit.Assert.*;
@@ -39,7 +42,7 @@ public class XmlParserTest {
 	 * More specifically, it ensures that a file with valid XML content.
 	 */
 	@Test
-	public void testParseValidXmlFileIsSuccessful() throws UnknownFileFormatException, IOException, InvalidFileFormatException {
+	public void testParseValidXmlFileIsSuccessful() throws UnknownFileFormatException, IOException, InvalidFileFormatException, ParserConfigurationException, SAXException, JSONException {
 		PhatFile plainTextFile = parser.parseFile(classLoader.getResource(PATH_TO_VALID_XML_FILE).getPath(), FileFormats.XML);
 
 		assertNotNull(plainTextFile);
@@ -59,7 +62,7 @@ public class XmlParserTest {
 	 * More specifically, it ensures that a file with valid XML content.
 	 */
 	@Test
-	public void testParseValidXmlFileWithAttributesIsSuccessful() throws UnknownFileFormatException, IOException, InvalidFileFormatException {
+	public void testParseValidXmlFileWithAttributesIsSuccessful() throws UnknownFileFormatException, IOException, InvalidFileFormatException, ParserConfigurationException, SAXException, JSONException {
 		PhatFile plainTextFile = parser.parseFile(classLoader.getResource(PATH_TO_VALID_XML_FILE_WITH_ATTRIBUTES).getPath(), FileFormats.XML);
 
 		assertNotNull(plainTextFile);
@@ -77,7 +80,7 @@ public class XmlParserTest {
 	 * Ensure that an invalid xml file on the file system is unsuccessfully parsed.
 	 */
 	@Test(expected = InvalidFileFormatException.class)
-	public void testParseInvalidXmlFileFails() throws UnknownFileFormatException, IOException, InvalidFileFormatException {
+	public void testParseInvalidXmlFileFails() throws UnknownFileFormatException, IOException, InvalidFileFormatException, ParserConfigurationException, SAXException, JSONException {
 		PhatFile plainTextFile = parser.parseFile(classLoader.getResource(PATH_TO_INVALID_XML_FILE).getPath(), FileFormats.XML);
 
 		assertNotNull(plainTextFile);
@@ -94,7 +97,7 @@ public class XmlParserTest {
 	 * Ensure that an empty xml file on the file system is unsuccessfully parsed.
 	 */
 	@Test(expected = InvalidFileFormatException.class)
-	public void testParseEmptyXmlFileFails() throws UnknownFileFormatException, IOException, InvalidFileFormatException {
+	public void testParseEmptyXmlFileFails() throws UnknownFileFormatException, IOException, InvalidFileFormatException, ParserConfigurationException, SAXException, JSONException {
 		PhatFile plainTextFile = parser.parseFile(classLoader.getResource(PATH_TO_EMPTY_XML_FILE).getPath(), FileFormats.XML);
 
 		assertNotNull(plainTextFile);

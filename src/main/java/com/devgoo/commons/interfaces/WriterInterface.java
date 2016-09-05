@@ -4,7 +4,10 @@ import com.devgoo.commons.exceptions.InvalidFileFormatException;
 import com.devgoo.commons.exceptions.UnknownFileFormatException;
 import com.devgoo.commons.util.FileFormats;
 import com.devgoo.commons.wrapper.PhatFile;
+import org.json.JSONException;
+import org.xml.sax.SAXException;
 
+import javax.xml.parsers.ParserConfigurationException;
 import java.io.IOException;
 
 /**
@@ -19,7 +22,7 @@ public interface WriterInterface {
 	 * @param output output format {e.g: csv, json, txt}
 	 * @return {@link PhatFile} which extends {@link java.io.File}
 	 */
-	PhatFile writeToFile(FileFormats output, String content, String absoluteFilePath) throws InvalidFileFormatException, IOException, UnknownFileFormatException;
+	PhatFile writeToFile(FileFormats output, String content, String absoluteFilePath) throws InvalidFileFormatException, IOException, UnknownFileFormatException, ParserConfigurationException, SAXException, JSONException;
 
 	/**
 	 * Write a string to a {@link java.io.File}
@@ -28,5 +31,5 @@ public interface WriterInterface {
 	 * @param output output format {e.g: csv, json, txt}
 	 * @return {@link PhatFile} which extends {@link java.io.File}
 	 */
-	PhatFile writeToFile(String name, String content, FileFormats output) throws IOException, InvalidFileFormatException, UnknownFileFormatException;
+	PhatFile writeToFile(String name, String content, FileFormats output) throws IOException, InvalidFileFormatException, UnknownFileFormatException, ParserConfigurationException, SAXException, JSONException;
 }

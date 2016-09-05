@@ -6,7 +6,10 @@ import com.devgoo.commons.interfaces.ValidatorInterface;
 import com.devgoo.commons.interfaces.WriterInterface;
 import com.devgoo.commons.util.FileFormats;
 import com.devgoo.commons.wrapper.PhatFile;
+import org.json.JSONException;
+import org.xml.sax.SAXException;
 
+import javax.xml.parsers.ParserConfigurationException;
 import java.io.IOException;
 
 import static com.devgoo.commons.util.FileFormats.JSON;
@@ -19,7 +22,7 @@ import static com.devgoo.commons.util.FileFormats.JSON;
 public class Writer implements WriterInterface {
 
 	@Override
-	public PhatFile writeToFile(FileFormats output, String content, String absoluteFilePath) throws InvalidFileFormatException, java.io.IOException, UnknownFileFormatException {
+	public PhatFile writeToFile(FileFormats output, String content, String absoluteFilePath) throws InvalidFileFormatException, java.io.IOException, UnknownFileFormatException, ParserConfigurationException, SAXException, JSONException {
 		java.io.File f;
 
 		switch(output) {
@@ -48,7 +51,7 @@ public class Writer implements WriterInterface {
 	}
 
 	@Override
-	public PhatFile writeToFile(String name, String content, FileFormats output) throws java.io.IOException, InvalidFileFormatException, UnknownFileFormatException {
+	public PhatFile writeToFile(String name, String content, FileFormats output) throws java.io.IOException, InvalidFileFormatException, UnknownFileFormatException, ParserConfigurationException, SAXException, JSONException {
 		java.io.File f;
 		String properName;
 
@@ -68,7 +71,7 @@ public class Writer implements WriterInterface {
 		return createFile(f, content, properName, output);
 	}
 
-	private PhatFile createFile(java.io.File f, String content, String properName, FileFormats output) throws IOException {
+	private PhatFile createFile(java.io.File f, String content, String properName, FileFormats output) throws IOException, ParserConfigurationException, SAXException, JSONException {
 		java.io.FileWriter fw = new java.io.FileWriter(f.getAbsoluteFile());
 		java.io.BufferedWriter bw = new java.io.BufferedWriter(fw);
 		bw.write(content);

@@ -6,7 +6,10 @@ import com.devgoo.commons.implementations.Validators;
 import com.devgoo.commons.interfaces.ParserInterface;
 import com.devgoo.commons.util.FileFormats;
 import com.devgoo.commons.wrapper.PhatFile;
+import org.json.JSONException;
+import org.xml.sax.SAXException;
 
+import javax.xml.parsers.ParserConfigurationException;
 import java.io.IOException;
 
 /**
@@ -19,7 +22,7 @@ public class Parser implements ParserInterface {
 
 	private Validators validators = new Validators();
 
-	public PhatFile parseFile(String absoluteFilePath, FileFormats fileFormat) throws UnknownFileFormatException, IOException, InvalidFileFormatException {
+	public PhatFile parseFile(String absoluteFilePath, FileFormats fileFormat) throws UnknownFileFormatException, IOException, InvalidFileFormatException, ParserConfigurationException, SAXException, JSONException {
 
 		switch (fileFormat) {
 			case TXT:
@@ -46,7 +49,7 @@ public class Parser implements ParserInterface {
 	 *
 	 * @return Returns the file parsed into a PhatFile.
 	 */
-	private PhatFile parseTextFile(String absoluteFilePath) throws IOException {
+	private PhatFile parseTextFile(String absoluteFilePath) throws IOException, ParserConfigurationException, SAXException, JSONException {
 		return new PhatFile(absoluteFilePath);
 	}
 
@@ -60,7 +63,7 @@ public class Parser implements ParserInterface {
 	 *
 	 * @return Returns the file parsed into a PhatFile.
 	 */
-	private PhatFile parseJsonFile(String absoluteFilePath) throws IOException, InvalidFileFormatException, UnknownFileFormatException {
+	private PhatFile parseJsonFile(String absoluteFilePath) throws IOException, InvalidFileFormatException, UnknownFileFormatException, ParserConfigurationException, SAXException, JSONException {
 		return validateAndParseFile(absoluteFilePath, FileFormats.JSON);
 	}
 
@@ -90,11 +93,11 @@ public class Parser implements ParserInterface {
 	 *
 	 * @return Returns the file parsed into a PhatFile.
 	 */
-	private PhatFile parseXmlFile(String absoluteFilePath) throws InvalidFileFormatException, IOException, UnknownFileFormatException {
+	private PhatFile parseXmlFile(String absoluteFilePath) throws InvalidFileFormatException, IOException, UnknownFileFormatException, ParserConfigurationException, SAXException, JSONException {
 		return validateAndParseFile(absoluteFilePath, FileFormats.XML);
 	}
 
-	private PhatFile validateAndParseFile(String absoluteFilePath, FileFormats fileFormat) throws IOException, InvalidFileFormatException, UnknownFileFormatException {
+	private PhatFile validateAndParseFile(String absoluteFilePath, FileFormats fileFormat) throws IOException, InvalidFileFormatException, UnknownFileFormatException, ParserConfigurationException, SAXException, JSONException {
 		PhatFile jsonFile = new PhatFile(absoluteFilePath);
 
 		//validate the file content. If this line does not throw
