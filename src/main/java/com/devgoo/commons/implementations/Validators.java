@@ -58,7 +58,6 @@ public class Validators implements ValidatorInterface {
 	}
 
 	/**
-	 *
 	 * TODO - Complete implementation of this function.
 	 *
 	 * Validates that the given content is valid csv format.
@@ -84,9 +83,6 @@ public class Validators implements ValidatorInterface {
 	}
 
 	/**
-	 *
-	 * TODO - Complete implementation of this function.
-	 *
 	 * Validates that the given content is valid xml format.
 	 *
 	 * @param content The content to be validated.
@@ -104,7 +100,7 @@ public class Validators implements ValidatorInterface {
 			DocumentBuilder builder = factory.newDocumentBuilder();
 
 			builder.setErrorHandler(new SimpleErrorHandler());
-			Document document = builder.parse(new StringBufferInputStream(content));
+			builder.parse(new StringBufferInputStream(content));
 
 			return true;
 		} catch (Exception e){
