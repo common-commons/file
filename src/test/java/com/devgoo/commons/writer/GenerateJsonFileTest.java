@@ -41,7 +41,7 @@ public class GenerateJsonFileTest {
 			assertEquals("name.json", file.getName());
 			assertEquals(FileFormats.JSON, file.getFormat());
 			assertEquals(content, file.getContentAsString());
-		} catch (IOException | InvalidFileFormatException e) {
+		} catch (IOException | InvalidFileFormatException | UnknownFileFormatException e) {
 			fail(e.getLocalizedMessage());
 		}
 	}
@@ -54,7 +54,7 @@ public class GenerateJsonFileTest {
 			writer.writeToFile("output", content, FileFormats.JSON);
 
 			fail("Not supposed to pass, JSON is incorrect.");
-		}catch (IOException e) {
+		}catch (IOException | UnknownFileFormatException e) {
 			fail(e.getLocalizedMessage());
 		} catch ( InvalidFileFormatException e) {
 			assertEquals("The JSON content is not valid.", e.getLocalizedMessage());

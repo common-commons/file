@@ -46,7 +46,7 @@ public class GenerateXmlFileTest {
 			assertEquals("name.xml", file.getName());
 			assertEquals(FileFormats.XML, file.getFormat());
 			assertEquals(content, file.getContentAsString());
-		} catch (IOException | InvalidFileFormatException e) {
+		} catch (IOException | InvalidFileFormatException |UnknownFileFormatException e) {
 			fail(e.getLocalizedMessage());
 		}
 	}
@@ -63,7 +63,7 @@ public class GenerateXmlFileTest {
 			writer.writeToFile("output", content, FileFormats.XML);
 
 			fail("Not supposed to pass, XML is incorrect.");
-		}catch (IOException e) {
+		}catch (IOException | UnknownFileFormatException e) {
 			fail(e.getLocalizedMessage());
 		} catch ( InvalidFileFormatException e) {
 			assertEquals("The XML content is not valid.", e.getLocalizedMessage());

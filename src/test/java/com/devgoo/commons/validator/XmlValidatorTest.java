@@ -1,5 +1,6 @@
 package com.devgoo.commons.validator;
 
+import com.devgoo.commons.exceptions.UnknownFileFormatException;
 import com.devgoo.commons.implementations.Validators;
 import com.devgoo.commons.interfaces.ValidatorInterface;
 import com.devgoo.commons.parser.Parser;
@@ -33,46 +34,26 @@ public class XmlValidatorTest {
 	}
 
 	@Test
-	public void testThatValidXmlIsReadCorrectly(){
-		try {
-			PhatFile testFile = new PhatFile(classLoader.getResource(PATH_TO_VALID_XML_FILE).getPath());
-			assertTrue(validator.validate(testFile.getContentAsString(), FileFormats.XML));
-		} catch (IOException e) {
-			e.printStackTrace();
-			fail(e.getLocalizedMessage());
-		}
+	public void testThatValidXmlIsReadCorrectly() throws IOException, UnknownFileFormatException {
+		PhatFile testFile = new PhatFile(classLoader.getResource(PATH_TO_VALID_XML_FILE).getPath());
+		assertTrue(validator.validate(testFile.getContentAsString(), FileFormats.XML));
 	}
 
 	@Test
-	public void testThatValidXmlWithAttributesIsReadCorrectly(){
-		try {
-			PhatFile testFile = new PhatFile(classLoader.getResource(PATH_TO_VALID_XML_FILE_WITH_ATTRIBUTES).getPath());
-			assertTrue(validator.validate(testFile.getContentAsString(), FileFormats.XML));
-		} catch (IOException e) {
-			e.printStackTrace();
-			fail(e.getLocalizedMessage());
-		}
+	public void testThatValidXmlWithAttributesIsReadCorrectly() throws IOException, UnknownFileFormatException {
+		PhatFile testFile = new PhatFile(classLoader.getResource(PATH_TO_VALID_XML_FILE_WITH_ATTRIBUTES).getPath());
+		assertTrue(validator.validate(testFile.getContentAsString(), FileFormats.XML));
 	}
 
 	@Test
-	public void testThatAnEmptyFileIsRejected(){
-		try {
-			PhatFile testFile = new PhatFile(classLoader.getResource(PATH_TO_EMPTY_XML_FILE).getPath());
-			assertFalse(validator.validate(testFile.getContentAsString(), FileFormats.XML));
-		} catch (IOException e) {
-			e.printStackTrace();
-			fail(e.getLocalizedMessage());
-		}
+	public void testThatAnEmptyFileIsRejected() throws IOException, UnknownFileFormatException {
+		PhatFile testFile = new PhatFile(classLoader.getResource(PATH_TO_EMPTY_XML_FILE).getPath());
+		assertFalse(validator.validate(testFile.getContentAsString(), FileFormats.XML));
 	}
 
 	@Test
-	public void testThatInvalidXmlIsRejected(){
-		try {
-			PhatFile testFile = new PhatFile(classLoader.getResource(PATH_TO_INVALID_XML_FILE).getPath());
-			assertFalse(validator.validate(testFile.getContentAsString(), FileFormats.XML));
-		} catch (IOException e) {
-			e.printStackTrace();
-			fail(e.getLocalizedMessage());
-		}
+	public void testThatInvalidXmlIsRejected() throws IOException, UnknownFileFormatException {
+		PhatFile testFile = new PhatFile(classLoader.getResource(PATH_TO_INVALID_XML_FILE).getPath());
+		assertFalse(validator.validate(testFile.getContentAsString(), FileFormats.XML));
 	}
 }

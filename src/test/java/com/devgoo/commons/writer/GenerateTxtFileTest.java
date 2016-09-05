@@ -31,7 +31,7 @@ public class GenerateTxtFileTest {
 	}
 
 	@Test
-	public void writeTxtFile() {
+	public void writeTxtFile() throws UnknownFileFormatException {
 		try {
 			String content = "Hello World, how are you World ?";
 
@@ -66,6 +66,36 @@ public class GenerateTxtFileTest {
 			assertEquals(content, file.getContentAsString());
 		} catch (UnknownFileFormatException | IOException | InvalidFileFormatException e) {
 			fail(e.getLocalizedMessage());
+		}
+	}
+
+	@Test
+	public void writeCorrectJSONFile() throws UnknownFileFormatException {
+		try {
+			String content = "{\"message\":\"Hello World, how are you World ?\"}";
+
+			PhatFile file = writer.writeToFile("output", content, FileFormats.JSON);
+
+			assertTrue(file.exists());
+
+			assertEquals("output.json", file.getName());
+			assertEquals(FileFormats.JSON, file.getFormat());
+			assertEquals(content, file.getContentAsString());
+		} catch (IOException | InvalidFileFormatException e) {
+			fail(e.getLocalizedMessage());
+		}
+	}
+
+	@Test
+	public void writeInCorrectJSONFile() throws UnknownFileFormatException {
+		try {
+			String content = "{\"message\":Hello World, how are you World ?\"}";
+
+			writer.writeToFile("output", content, FileFormats.JSON);
+
+			fail("Not supposed to pass, JSON is incorrect.");
+		} catch (IOException | InvalidFileFormatException e) {
+			assertEquals("The JSON content is not valid.", e.getLocalizedMessage());
 		}
 	}
 }

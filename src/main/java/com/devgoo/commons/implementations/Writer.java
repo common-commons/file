@@ -6,21 +6,15 @@ import com.devgoo.commons.interfaces.ValidatorInterface;
 import com.devgoo.commons.interfaces.WriterInterface;
 import com.devgoo.commons.util.FileFormats;
 import com.devgoo.commons.wrapper.PhatFile;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
-import java.io.IOException;
 
 import static com.devgoo.commons.util.FileFormats.JSON;
 import static com.devgoo.commons.util.FileFormats.XML;
-
-;
 
 /**
  * Created by chrismipi on 2016/09/02.
  */
 public class Writer implements WriterInterface {
-	private Logger logger = LoggerFactory.getLogger(getClass().getName());
+	private org.slf4j.Logger logger = org.slf4j.LoggerFactory.getLogger(getClass().getName());
 
 	@Override
 	public PhatFile writeToFile(FileFormats output, String content, String absoluteFilePath) throws InvalidFileFormatException, java.io.IOException, UnknownFileFormatException {
@@ -54,15 +48,14 @@ public class Writer implements WriterInterface {
 	 * @param content string which is validated
 	 * @throws InvalidFileFormatException is the json is invalid
 	 */
-	private void validateJson(String content) throws InvalidFileFormatException {
+	private void validateJson(String content) throws InvalidFileFormatException, UnknownFileFormatException {
 		final ValidatorInterface v = new Validators();
 		if(!v.validate(content.trim(), JSON))
 			throw new InvalidFileFormatException("The JSON content is not valid.");
 	}
 
-
 	@Override
-	public PhatFile writeToFile(String name, String content, FileFormats output) throws java.io.IOException, InvalidFileFormatException {
+	public PhatFile writeToFile(String name, String content, FileFormats output) throws java.io.IOException, InvalidFileFormatException, UnknownFileFormatException {
 		java.io.File f;
 		String properName;
 
@@ -91,15 +84,16 @@ public class Writer implements WriterInterface {
 	/**
 	 * Validates xml using the class {@link ValidatorInterface}
 	 * @param content string which is validated
-	 * @throws InvalidFileFormatException is the xml is invalid
+	 * @throws InvalidFileFormatException is the xml is invalid or {@link UnknownFileFormatException } is the file is not
+	 * Supported
 	 */
-	private void validateXml(String content) throws InvalidFileFormatException {
+	private void validateXml(String content) throws InvalidFileFormatException, UnknownFileFormatException {
 		final ValidatorInterface v = new Validators();
 		if(!v.validate(content.trim(), XML))
 			throw new InvalidFileFormatException("The XML content is not valid.");
 	}
 
-	private PhatFile createFile(java.io.File f, String content, String properName, FileFormats output) throws IOException {
+	private PhatFile createFile(java.io.File f, String content, String properName, FileFormats output) throws java.io.IOException {
 		java.io.FileWriter fw = new java.io.FileWriter(f.getAbsoluteFile());
 		java.io.BufferedWriter bw = new java.io.BufferedWriter(fw);
 		bw.write(content);

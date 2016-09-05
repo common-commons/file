@@ -1,13 +1,9 @@
 package com.devgoo.commons.implementations;
 
+import com.devgoo.commons.exceptions.UnknownFileFormatException;
 import com.devgoo.commons.interfaces.ValidatorInterface;
 import com.devgoo.commons.util.FileFormats;
 import com.devgoo.commons.util.SimpleErrorHandler;
-import org.w3c.dom.Document;
-
-import javax.xml.parsers.DocumentBuilder;
-import javax.xml.parsers.DocumentBuilderFactory;
-import java.io.StringBufferInputStream;
 
 /**
  * Created by chrismipi on 2016/09/02.
@@ -15,9 +11,12 @@ import java.io.StringBufferInputStream;
 public class Validators implements ValidatorInterface {
 
 	@Override
-	public boolean validate(String content, FileFormats format) {
+	public boolean validate(String content, FileFormats format) throws UnknownFileFormatException {
 		if(content == null) return false;
 		switch (format) {
+			case TXT:
+				//Plain text files can have content of any form.
+				return true;
 			case JSON:
 				return validateJsonFormat(content);
 			case CSV:
@@ -25,7 +24,7 @@ public class Validators implements ValidatorInterface {
 			case XML:
 				return validateXmlFormat(content);
 			default:
-				return false;
+				throw new UnknownFileFormatException("The file type provided is not supported.");
 		}
 	}
 
@@ -51,7 +50,6 @@ public class Validators implements ValidatorInterface {
 	}
 
 	/**
-	 *
 	 * TODO - Complete implementation of this function.
 	 *
 	 * Validates that the given content is valid csv format.
@@ -75,9 +73,6 @@ public class Validators implements ValidatorInterface {
 	}
 
 	/**
-	 *
-	 * TODO - Complete implementation of this function.
-	 *
 	 * Validates that the given content is valid xml format.
 	 *
 	 * @param content The content to be validated.
@@ -87,14 +82,14 @@ public class Validators implements ValidatorInterface {
 	 */
 	private boolean validateXmlFormat(String content) {
 		try{
-			DocumentBuilderFactory factory = DocumentBuilderFactory.newInstance();
+			javax.xml.parsers.DocumentBuilderFactory factory = javax.xml.parsers.DocumentBuilderFactory.newInstance();
 			factory.setValidating(false);
 			factory.setNamespaceAware(true);
 
-			DocumentBuilder builder = factory.newDocumentBuilder();
+			javax.xml.parsers.DocumentBuilder builder = factory.newDocumentBuilder();
 
 			builder.setErrorHandler(new SimpleErrorHandler());
-			Document document = builder.parse(new StringBufferInputStream(content));
+			builder.parse(new java.io.StringBufferInputStream(content));
 
 			return true;
 		} catch (Exception e){
