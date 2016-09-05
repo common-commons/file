@@ -49,11 +49,17 @@ public class Writer implements WriterInterface {
 		return createFile(f, content, null,output);
 	}
 
+	/**
+	 * Validates json using the class {@link ValidatorInterface}
+	 * @param content string which is validated
+	 * @throws InvalidFileFormatException is the json is invalid
+	 */
 	private void validateJson(String content) throws InvalidFileFormatException {
 		final ValidatorInterface v = new Validators();
 		if(!v.validate(content.trim(), JSON))
 			throw new InvalidFileFormatException("The JSON content is not valid.");
 	}
+
 
 	@Override
 	public PhatFile writeToFile(String name, String content, FileFormats output) throws java.io.IOException, InvalidFileFormatException {
@@ -82,6 +88,11 @@ public class Writer implements WriterInterface {
 		return createFile(f, content, properName, output);
 	}
 
+	/**
+	 * Validates xml using the class {@link ValidatorInterface}
+	 * @param content string which is validated
+	 * @throws InvalidFileFormatException is the xml is invalid
+	 */
 	private void validateXml(String content) throws InvalidFileFormatException {
 		final ValidatorInterface v = new Validators();
 		if(!v.validate(content.trim(), XML))
