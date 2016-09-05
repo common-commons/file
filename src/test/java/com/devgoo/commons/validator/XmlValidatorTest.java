@@ -33,46 +33,26 @@ public class XmlValidatorTest {
 	}
 
 	@Test
-	public void testThatValidXmlIsReadCorrectly(){
-		try {
-			PhatFile testFile = new PhatFile(classLoader.getResource(PATH_TO_VALID_XML_FILE).getPath());
-			assertTrue(validator.validate(testFile.getContentAsString(), FileFormats.XML));
-		} catch (IOException e) {
-			e.printStackTrace();
-			fail(e.getLocalizedMessage());
-		}
+	public void testThatValidXmlIsReadCorrectly() throws IOException {
+		PhatFile testFile = new PhatFile(classLoader.getResource(PATH_TO_VALID_XML_FILE).getPath());
+		assertTrue(validator.validate(testFile.getContentAsString(), FileFormats.XML));
 	}
 
 	@Test
-	public void testThatValidXmlWithAttributesIsReadCorrectly(){
-		try {
-			PhatFile testFile = new PhatFile(classLoader.getResource(PATH_TO_VALID_XML_FILE_WITH_ATTRIBUTES).getPath());
-			assertTrue(validator.validate(testFile.getContentAsString(), FileFormats.XML));
-		} catch (IOException e) {
-			e.printStackTrace();
-			fail(e.getLocalizedMessage());
-		}
+	public void testThatValidXmlWithAttributesIsReadCorrectly() throws IOException {
+		PhatFile testFile = new PhatFile(classLoader.getResource(PATH_TO_VALID_XML_FILE_WITH_ATTRIBUTES).getPath());
+		assertTrue(validator.validate(testFile.getContentAsString(), FileFormats.XML));
 	}
 
 	@Test
-	public void testThatAnEmptyFileIsRejected(){
-		try {
-			PhatFile testFile = new PhatFile(classLoader.getResource(PATH_TO_EMPTY_XML_FILE).getPath());
-			assertFalse(validator.validate(testFile.getContentAsString(), FileFormats.XML));
-		} catch (IOException e) {
-			e.printStackTrace();
-			fail(e.getLocalizedMessage());
-		}
+	public void testThatAnEmptyFileIsRejected() throws IOException {
+		PhatFile testFile = new PhatFile(classLoader.getResource(PATH_TO_EMPTY_XML_FILE).getPath());
+		assertFalse(validator.validate(testFile.getContentAsString(), FileFormats.XML));
 	}
 
 	@Test
-	public void testThatInvalidXmlIsRejected(){
-		try {
-			PhatFile testFile = new PhatFile(classLoader.getResource(PATH_TO_INVALID_XML_FILE).getPath());
-			assertFalse(validator.validate(testFile.getContentAsString(), FileFormats.XML));
-		} catch (IOException e) {
-			e.printStackTrace();
-			fail(e.getLocalizedMessage());
-		}
+	public void testThatInvalidXmlIsRejected() throws IOException {
+		PhatFile testFile = new PhatFile(classLoader.getResource(PATH_TO_INVALID_XML_FILE).getPath());
+		assertFalse(validator.validate(testFile.getContentAsString(), FileFormats.XML));
 	}
 }
