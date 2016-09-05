@@ -20,10 +20,10 @@ public class XmlParserTest {
 
 	private Parser parser;
 
-	private final String PATH_TO_VALID_XML_FILE = "files/validator/validXmlFile.xml";
-	private final String PATH_TO_VALID_XML_FILE_WITH_ATTRIBUTES = "files/validator/validXmlFileWithAttributes.xml";
-	private final String PATH_TO_INVALID_XML_FILE = "files/validator/invalidXmlFile.xml";
-	private final String PATH_TO_EMPTY_XML_FILE = "files/validator/emptyXmlFile.xml";
+	private final String PATH_TO_VALID_XML_FILE = "files/xml/validXmlFile.xml";
+	private final String PATH_TO_VALID_XML_FILE_WITH_ATTRIBUTES = "files/xml/validXmlFileWithAttributes.xml";
+	private final String PATH_TO_INVALID_XML_FILE = "files/xml/invalidXmlFile.xml";
+	private final String PATH_TO_EMPTY_XML_FILE = "files/xml/emptyXmlFile.xml";
 
 	@Before
 	public void setUp() {

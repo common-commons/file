@@ -46,7 +46,7 @@ public class Parser implements ParserInterface {
 	 *
 	 * @return Returns the file parsed into a PhatFile.
 	 */
-	private PhatFile parseTextFile(String absoluteFilePath) {
+	private PhatFile parseTextFile(String absoluteFilePath) throws IOException {
 		return new PhatFile(absoluteFilePath);
 	}
 

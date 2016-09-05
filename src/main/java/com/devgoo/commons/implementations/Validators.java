@@ -4,6 +4,9 @@ import com.devgoo.commons.exceptions.UnknownFileFormatException;
 import com.devgoo.commons.interfaces.ValidatorInterface;
 import com.devgoo.commons.util.FileFormats;
 import com.devgoo.commons.util.SimpleErrorHandler;
+import com.devgoo.commons.wrapper.PhatFile;
+
+import java.io.IOException;
 
 /**
  * Created by chrismipi on 2016/09/02.
@@ -25,6 +28,31 @@ public class Validators implements ValidatorInterface {
 				return validateXmlFormat(content);
 			default:
 				throw new UnknownFileFormatException("The file type provided is not supported.");
+		}
+	}
+
+	/**
+	 *
+	 * Determines the FileFormats type of the file provided.
+	 *
+	 * @param file The PhatFile object.
+	 *
+	 * @return Returns the FileFormats type of the file. FileFormats.TXT is the default format.
+	 *
+	 * @throws IOException
+	 * @throws UnknownFileFormatException
+	 */
+	@Override
+	public FileFormats determineFileType(PhatFile file) throws IOException {
+
+		if(validateJsonFormat(file.getContentAsString())){
+			return FileFormats.JSON;
+		}else if(validateCsvFormat(file.getContentAsString())){
+			return FileFormats.CSV;
+		}else if(validateXmlFormat(file.getContentAsString())){
+			return FileFormats.XML;
+		}else{
+			return FileFormats.TXT;
 		}
 	}
 

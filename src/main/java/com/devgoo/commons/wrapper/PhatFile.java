@@ -1,6 +1,8 @@
 package com.devgoo.commons.wrapper;
 
 import com.devgoo.commons.exceptions.InvalidFileFormatException;
+import com.devgoo.commons.implementations.Validators;
+import com.devgoo.commons.interfaces.ValidatorInterface;
 import com.devgoo.commons.util.FileFormats;
 import org.xml.sax.SAXException;
 
@@ -13,15 +15,18 @@ import java.io.IOException;
 public class PhatFile extends java.io.File {
 	private final java.io.File file;
 	private FileFormats format;
+	private ValidatorInterface validators;
 	private String name;
 
 	/**
 	 * Default constructor for {@link java.io.File}
 	 * @param pathname path to the file
 	 */
-	public PhatFile(String pathname) {
+	public PhatFile(String pathname) throws IOException {
 		super(pathname);
 		file = super.getAbsoluteFile();
+		validators = new Validators();
+		this.format = validators.determineFileType(this);
 	}
 
 	/**
@@ -29,9 +34,11 @@ public class PhatFile extends java.io.File {
 	 * @param parent {@link String}
 	 * @param child {@link String}
 	 */
-	public PhatFile(String parent, String child) {
+	public PhatFile(String parent, String child) throws IOException {
 		super(parent, child);
 		file = super.getAbsoluteFile();
+		validators = new Validators();
+		this.format = validators.determineFileType(this);
 	}
 
 	/**
@@ -39,18 +46,22 @@ public class PhatFile extends java.io.File {
 	 * @param parent {@link java.io.File}
 	 * @param child {@link java.io.File}
 	 */
-	public PhatFile(java.io.File parent, String child) {
+	public PhatFile(java.io.File parent, String child) throws IOException {
 		super(parent, child);
 		file = super.getAbsoluteFile();
+		validators = new Validators();
+		this.format = validators.determineFileType(this);
 	}
 
 	/**
 	 * Default constructor for {@link java.io.File}
 	 * @param uri path to the file
 	 */
-	public PhatFile(java.net.URI uri) {
+	public PhatFile(java.net.URI uri) throws IOException {
 		super(uri);
 		file = super.getAbsoluteFile();
+		validators = new Validators();
+		this.format = validators.determineFileType(this);
 	}
 
 	/**

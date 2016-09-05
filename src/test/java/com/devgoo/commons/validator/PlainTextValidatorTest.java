@@ -22,9 +22,9 @@ public class PlainTextValidatorTest {
 
 	private ValidatorInterface validator;
 
-	private final String PATH_TO_EMPTY_TEXT_FILE = "files/validator/plainTextFileOne.txt";
-	private final String PATH_TO_SIMPLE_TEXT_FILE = "files/validator/plainTextFileThree";
-	private final String PATH_TO_COMPLEX_TEXT_FILE = "files/validator/plainTextFileTwo.txt";
+	private final String PATH_TO_EMPTY_TEXT_FILE = "files/text/plainTextFileOne.txt";
+	private final String PATH_TO_SIMPLE_TEXT_FILE = "files/text/plainTextFileThree";
+	private final String PATH_TO_COMPLEX_TEXT_FILE = "files/text/plainTextFileTwo.txt";
 
 	@Before
 	public void setUp() {

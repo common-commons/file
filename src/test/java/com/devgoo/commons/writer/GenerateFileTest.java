@@ -50,7 +50,7 @@ public class GenerateFileTest {
 	@Test
 	public void writeTxtWithFilePath() {
 		try {
-			URL url = classLoader.getResource("files/writer/file1.txt");
+			URL url = classLoader.getResource("files/text/file1.txt");
 
 			assertNotNull(url);
 

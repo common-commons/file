@@ -22,8 +22,8 @@ public class JsonParserTest {
 
 	private Parser parser;
 
-	private final String PATH_TO_JSON_FILE = "files/parser/jsonFile.json";
-	private final String PATH_TO_JSON_LIST_FILE = "files/parser/jsonListFile.json";
+	private final String PATH_TO_JSON_FILE = "files/json/jsonFile.json";
+	private final String PATH_TO_JSON_LIST_FILE = "files/json/jsonListFile.json";
 
 	@Before
 	public void setUp() {

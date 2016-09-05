@@ -3,7 +3,6 @@ package com.devgoo.commons.validator;
 import com.devgoo.commons.exceptions.UnknownFileFormatException;
 import com.devgoo.commons.implementations.Validators;
 import com.devgoo.commons.interfaces.ValidatorInterface;
-import com.devgoo.commons.parser.Parser;
 import com.devgoo.commons.util.FileFormats;
 import com.devgoo.commons.wrapper.PhatFile;
 import org.junit.Before;
@@ -22,10 +21,10 @@ public class XmlValidatorTest {
 
 	private ValidatorInterface validator;
 
-	private final String PATH_TO_VALID_XML_FILE = "files/validator/validXmlFile.xml";
-	private final String PATH_TO_VALID_XML_FILE_WITH_ATTRIBUTES = "files/validator/validXmlFileWithAttributes.xml";
-	private final String PATH_TO_EMPTY_XML_FILE = "files/validator/emptyXmlFile.xml";
-	private final String PATH_TO_INVALID_XML_FILE = "files/validator/invalidXmlFile.xml";
+	private final String PATH_TO_VALID_XML_FILE = "files/xml/validXmlFile.xml";
+	private final String PATH_TO_VALID_XML_FILE_WITH_ATTRIBUTES = "files/xml/validXmlFileWithAttributes.xml";
+	private final String PATH_TO_EMPTY_XML_FILE = "files/xml/emptyXmlFile.xml";
+	private final String PATH_TO_INVALID_XML_FILE = "files/xml/invalidXmlFile.xml";
 
 	@Before
 	public void setUp() {
