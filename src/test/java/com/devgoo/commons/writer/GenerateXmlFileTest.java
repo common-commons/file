@@ -1,5 +1,6 @@
 package com.devgoo.commons.writer;
 
+import com.devgoo.commons.exceptions.IllegalPhatFileWriting;
 import com.devgoo.commons.exceptions.InvalidFileFormatException;
 import com.devgoo.commons.exceptions.UnknownFileFormatException;
 import com.devgoo.commons.implementations.Writer;
@@ -8,7 +9,9 @@ import com.devgoo.commons.util.FileFormats;
 import com.devgoo.commons.wrapper.PhatFile;
 import org.junit.Before;
 import org.junit.Test;
+import org.w3c.dom.Document;
 
+import javax.xml.parsers.ParserConfigurationException;
 import java.io.IOException;
 import java.net.URL;
 
@@ -97,4 +100,30 @@ public class GenerateXmlFileTest {
 		}
 	}
 
+	@Test
+	public void writeXmlObjectToTxtFile() {
+		try {
+			String content =  "<note>\n" +
+					"    <to>Alice</to>\n" +
+					"    <from>Bob</from>\n" +
+					"    <heading>Hello</heading>\n" +
+					"    <body>I know what you did last summer...smh!</body>\n" +
+					"</note>";
+			javax.xml.parsers.DocumentBuilderFactory factory = javax.xml.parsers.DocumentBuilderFactory.newInstance();
+//			factory.setValidating(false);
+//			factory.setNamespaceAware(true);
+
+			javax.xml.parsers.DocumentBuilder builder = factory.newDocumentBuilder();
+
+			Document document = builder.newDocument();
+			document.setTextContent(content);
+			PhatFile file = writer.writeToFile("stuff", document, FileFormats.TXT);
+
+			assertEquals("stuff.txt", file.getName());
+			assertEquals(content, file.getContentAsString());
+			assertEquals(FileFormats.TXT, file.getFormat());
+		} catch ( IOException | ParserConfigurationException | IllegalPhatFileWriting e) {
+			fail(e.getLocalizedMessage());
+		}
+	}
 }

@@ -9,6 +9,7 @@ import com.devgoo.commons.util.FileFormats;
 import com.devgoo.commons.wrapper.PhatFile;
 import org.json.JSONArray;
 import org.json.JSONObject;
+import org.w3c.dom.Document;
 
 import java.io.IOException;
 
@@ -121,6 +122,24 @@ public class Writer implements WriterInterface {
 		}
 
 		return createFile(f, content.toString(), properName, output);
+	}
+
+	@Override
+	public PhatFile writeToFile(String name, Document content, FileFormats output) throws IllegalPhatFileWriting, IOException {
+		java.io.File f;
+		String properName;
+
+		switch (output) {
+			case TXT:
+				f = java.io.File.createTempFile(name, output.getExtension());
+				properName = name + output.getExtension();
+				break;
+
+			default:
+				throw new IllegalPhatFileWriting("Cannot write the content to an extension " + output.getName());
+		}
+
+		return createFile(f, content.getTextContent(), properName, output);
 	}
 
 	/**

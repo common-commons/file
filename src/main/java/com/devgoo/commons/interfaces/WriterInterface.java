@@ -6,6 +6,8 @@ import com.devgoo.commons.exceptions.UnknownFileFormatException;
 import com.devgoo.commons.util.FileFormats;
 import com.devgoo.commons.wrapper.PhatFile;
 
+import java.io.IOException;
+
 /**
  * Created by madimetja on 2016/09/02.
  */
@@ -49,4 +51,6 @@ public interface WriterInterface {
 	 * @return {@link PhatFile} which extends {@link java.io.File}
 	 */
 	PhatFile writeToFile(String name, org.json.JSONArray content, FileFormats output) throws java.io.IOException, IllegalPhatFileWriting;
+
+	PhatFile writeToFile(String name, org.w3c.dom.Document content, FileFormats output) throws IllegalPhatFileWriting, IOException;
 }
