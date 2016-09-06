@@ -1,6 +1,8 @@
 package com.devgoo.commons.wrapper;
 
 import com.devgoo.commons.exceptions.InvalidFileFormatException;
+import com.devgoo.commons.exceptions.UnknownFileFormatException;
+import com.devgoo.commons.util.FileFormats;
 import org.json.JSONException;
 import org.junit.Before;
 import org.junit.Test;
@@ -43,12 +45,41 @@ public class GetPhatFileAsTest {
 		PhatFile phatFile = new PhatFile(url.toURI());
 
 		//Create an instance of the org.w3c.dom.Document
-		org.json.JSONObject JsonObject = new org.json.JSONObject(url.toURI());
+		org.json.JSONObject JsonObject = new org.json.JSONObject("{\n" +
+			"  \"title\": \"Barney Is A Dinaa-whaaa??\",\n" +
+			"  \"description\": \"Incredibly random description...\",\n" +
+			"  \"listNode\": [\n" +
+			"    \"Value Within List\",\n" +
+			"    \"Another Value Within List\",\n" +
+			"    \"A Final Value Within The List\"\n" +
+			"  ],\n" +
+			"  \"nestedObject\": {\n" +
+			"    \"nestedKey\": \"Nested Key Value\"\n" +
+			"  }\n" +
+			"}");
 
 		org.json.JSONObject phatFileObjectInstance = phatFile.getAsJsonObject();
 
-		//assertTrue(phatFile.getAsJsonObject() instanceof org.json.JSONObject);
-		//assertEquals(JsonObject.toString(), phatFile.getAsJsonObject().toString());
+		assertTrue(phatFile.getAsJsonObject() instanceof org.json.JSONObject);
+		assertEquals(JsonObject.toString(), phatFile.getAsJsonObject().toString());
+	}
+
+	/**
+	 * Ensure that an xml file cannot be returned as a JSONObject.
+	 */
+	@Test(expected = InvalidFileFormatException.class)
+	public void testGetJsonObjectInstanceThrowsExceptionIfNotJsonContent() throws URISyntaxException, ParserConfigurationException, SAXException, JSONException, IOException, InvalidFileFormatException {
+
+		URL url = classLoader.getResource(PATH_TO_VALID_XML_FILE);
+		assertNotNull(url);
+		File tmp = new File(url.toURI());
+		assertTrue(tmp.exists());
+
+		PhatFile phatFile = new PhatFile(url.toURI());
+
+		assertNotNull(phatFile);
+
+		phatFile.getAsJsonObject();
 	}
 
 	@Test
@@ -69,5 +100,23 @@ public class GetPhatFileAsTest {
 
 		assertTrue(phatFile.getAsDocument() instanceof org.w3c.dom.Document);
 		assertEquals(document.getTextContent(), phatFile.getAsDocument().getTextContent());
+	}
+
+	/**
+	 * Ensure that an xml file cannot be returned as a JSONObject.
+	 */
+	@Test(expected = InvalidFileFormatException.class)
+	public void testGetXmlDocumentInstanceThrowsExceptionIfNotXmlContent() throws ParserConfigurationException, InvalidFileFormatException, SAXException, IOException, URISyntaxException, JSONException {
+
+		URL url = classLoader.getResource(PATH_TO_VALID_JSON_FILE);
+		assertNotNull(url);
+		File tmp = new File(url.toURI());
+		assertTrue(tmp.exists());
+
+		PhatFile phatFile = new PhatFile(url.toURI());
+
+		assertNotNull(phatFile);
+
+		phatFile.getAsDocument();
 	}
 }

@@ -31,7 +31,7 @@ public class PhatFile extends java.io.File {
 		file = super.getAbsoluteFile();
 		validators = new Validators();
 		this.format = validators.determineFileType(this);
-		createCompatibleFiles();
+		initialiseCompatibleFiles();
 	}
 
 	/**
@@ -44,7 +44,7 @@ public class PhatFile extends java.io.File {
 		file = super.getAbsoluteFile();
 		validators = new Validators();
 		this.format = validators.determineFileType(this);
-		createCompatibleFiles();
+		initialiseCompatibleFiles();
 	}
 
 	/**
@@ -57,7 +57,7 @@ public class PhatFile extends java.io.File {
 		file = super.getAbsoluteFile();
 		validators = new Validators();
 		this.format = validators.determineFileType(this);
-		createCompatibleFiles();
+		initialiseCompatibleFiles();
 	}
 
 	/**
@@ -69,24 +69,12 @@ public class PhatFile extends java.io.File {
 		file = super.getAbsoluteFile();
 		validators = new Validators();
 		this.format = validators.determineFileType(this);
-		createCompatibleFiles();
+		initialiseCompatibleFiles();
 	}
 
-	private void createCompatibleFiles() throws IOException, SAXException, ParserConfigurationException, JSONException {
-
-		switch (this.format) {
-			case JSON:
-				jsonObject = new org.json.JSONObject(this.getContentAsString().trim());
-				xmlDocument = null;
-			case XML:
-				javax.xml.parsers.DocumentBuilderFactory factory = javax.xml.parsers.DocumentBuilderFactory.newInstance();
-				factory.setValidating(false);
-				factory.setNamespaceAware(true);
-				javax.xml.parsers.DocumentBuilder builder = factory.newDocumentBuilder();
-				xmlDocument = builder.parse(new java.io.StringBufferInputStream(this.getContentAsString()));
-				//xmlDocument = builder.parse(this.file.getAbsolutePath());
-				jsonObject = null;
-		}
+	private void initialiseCompatibleFiles() throws IOException, SAXException, ParserConfigurationException, JSONException {
+		this.jsonObject = null;
+		this.xmlDocument = null;
 	}
 
 	/**
@@ -122,10 +110,15 @@ public class PhatFile extends java.io.File {
 	 * @return org.json.JSONObject.
 	 * @throws InvalidFileFormatException
 	 */
-	public org.json.JSONObject getAsJsonObject() throws InvalidFileFormatException {
+	public org.json.JSONObject getAsJsonObject() throws InvalidFileFormatException, IOException, JSONException {
 
 		if(this.format.equals(FileFormats.JSON)){
+			if(this.jsonObject == null){
+				this.jsonObject = new org.json.JSONObject(this.getContentAsString().trim());
+			}
+
 			return this.jsonObject;
+
 		}else{
 			throw new InvalidFileFormatException("The given file of type " + this.format + " cannot be returned as org.json.JSONObject.");
 		}
@@ -144,7 +137,18 @@ public class PhatFile extends java.io.File {
 	public org.w3c.dom.Document getAsDocument() throws InvalidFileFormatException, ParserConfigurationException, IOException, SAXException {
 
 		if (this.format.equals(FileFormats.XML)) {
+
+			if(this.xmlDocument == null){
+				javax.xml.parsers.DocumentBuilderFactory factory = javax.xml.parsers.DocumentBuilderFactory.newInstance();
+				factory.setValidating(false);
+				factory.setNamespaceAware(true);
+				javax.xml.parsers.DocumentBuilder builder = factory.newDocumentBuilder();
+				xmlDocument = builder.parse(new java.io.StringBufferInputStream(this.getContentAsString()));
+				this.xmlDocument = builder.parse(this.file.getAbsolutePath());
+			}
+
 			return this.xmlDocument;
+
 		} else {
 			throw new InvalidFileFormatException("The given file of type " + this.format + " cannot be returned as org.w3c.dom.Document.");
 		}
