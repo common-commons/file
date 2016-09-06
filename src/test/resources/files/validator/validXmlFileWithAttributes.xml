@@ -1,6 +1,0 @@
-<note description="This is the root attribute">
-    <to>Alice</to>
-    <from value="Bob">Bob</from>
-    <heading>Hello</heading>
-    <body>I know what you did last summer...smh!</body>
-</note>

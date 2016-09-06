@@ -6,9 +6,12 @@ import com.devgoo.commons.implementations.Writer;
 import com.devgoo.commons.interfaces.WriterInterface;
 import com.devgoo.commons.util.FileFormats;
 import com.devgoo.commons.wrapper.PhatFile;
+import org.json.JSONException;
 import org.junit.Before;
 import org.junit.Test;
+import org.xml.sax.SAXException;
 
+import javax.xml.parsers.ParserConfigurationException;
 import java.io.IOException;
 import java.net.URL;
 
@@ -30,7 +33,7 @@ public class GenerateXmlFileTest {
 	}
 
 	@Test
-	public void writeCorrectXmlFile() {
+	public void writeCorrectXmlFile() throws JSONException, SAXException, ParserConfigurationException {
 		try {
 			String content =  "<note>\n" +
 												"    <to>Alice</to>\n" +
@@ -52,7 +55,7 @@ public class GenerateXmlFileTest {
 	}
 
 	@Test
-	public void writeInCorrectXmlFile() {
+	public void writeInCorrectXmlFile() throws JSONException, SAXException, ParserConfigurationException {
 		try {
 			String content =  "<note>\n" +
 												"    <to>Alice</to>\n" +
@@ -71,7 +74,7 @@ public class GenerateXmlFileTest {
 	}
 
 	@Test
-	public void writeCorrectXmlWithFilePath() {
+	public void writeCorrectXmlWithFilePath() throws JSONException, SAXException, ParserConfigurationException {
 		try {
 			URL url = classLoader.getResource("files/writer/file3.xml");
 

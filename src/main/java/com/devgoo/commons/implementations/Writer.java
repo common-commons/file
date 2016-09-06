@@ -8,8 +8,11 @@ import com.devgoo.commons.interfaces.WriterInterface;
 import com.devgoo.commons.util.FileFormats;
 import com.devgoo.commons.wrapper.PhatFile;
 import org.json.JSONArray;
+import org.json.JSONException;
 import org.json.JSONObject;
+import org.xml.sax.SAXException;
 
+import javax.xml.parsers.ParserConfigurationException;
 import java.io.IOException;
 
 import static com.devgoo.commons.util.FileFormats.JSON;
@@ -22,7 +25,7 @@ public class Writer implements WriterInterface {
 	private org.slf4j.Logger logger = org.slf4j.LoggerFactory.getLogger(getClass().getName());
 
 	@Override
-	public PhatFile writeToFile(FileFormats output, String content, String absoluteFilePath) throws InvalidFileFormatException, java.io.IOException, UnknownFileFormatException {
+	public PhatFile writeToFile(FileFormats output, String content, String absoluteFilePath) throws InvalidFileFormatException, java.io.IOException, UnknownFileFormatException, ParserConfigurationException, SAXException, JSONException {
 		java.io.File f;
 
 		switch(output) {
@@ -60,7 +63,7 @@ public class Writer implements WriterInterface {
 	}
 
 	@Override
-	public PhatFile writeToFile(String name, String content, FileFormats output) throws java.io.IOException, InvalidFileFormatException, UnknownFileFormatException {
+	public PhatFile writeToFile(String name, String content, FileFormats output) throws java.io.IOException, InvalidFileFormatException, UnknownFileFormatException, ParserConfigurationException, SAXException, JSONException {
 		java.io.File f;
 		String properName;
 
@@ -87,7 +90,7 @@ public class Writer implements WriterInterface {
 	}
 
 	@Override
-	public PhatFile writeToFile(String name, JSONObject content, FileFormats output) throws IllegalPhatFileWriting, IOException {
+	public PhatFile writeToFile(String name, JSONObject content, FileFormats output) throws IllegalPhatFileWriting, IOException, ParserConfigurationException, SAXException, JSONException {
 		java.io.File f;
 		String properName;
 
@@ -105,7 +108,7 @@ public class Writer implements WriterInterface {
 	}
 
 	@Override
-	public PhatFile writeToFile(String name, JSONArray content, FileFormats output) throws IOException, IllegalPhatFileWriting {
+	public PhatFile writeToFile(String name, JSONArray content, FileFormats output) throws IOException, IllegalPhatFileWriting, ParserConfigurationException, SAXException, JSONException {
 		java.io.File f;
 		String properName;
 
@@ -135,7 +138,7 @@ public class Writer implements WriterInterface {
 			throw new InvalidFileFormatException("The XML content is not valid.");
 	}
 
-	private PhatFile createFile(java.io.File f, String content, String properName, FileFormats output) throws java.io.IOException {
+	private PhatFile createFile(java.io.File f, String content, String properName, FileFormats output) throws java.io.IOException, JSONException, SAXException, ParserConfigurationException {
 		java.io.FileWriter fw = new java.io.FileWriter(f.getAbsoluteFile());
 		java.io.BufferedWriter bw = new java.io.BufferedWriter(fw);
 		bw.write(content);

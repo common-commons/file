@@ -4,9 +4,12 @@ import com.devgoo.commons.exceptions.InvalidFileFormatException;
 import com.devgoo.commons.exceptions.UnknownFileFormatException;
 import com.devgoo.commons.util.FileFormats;
 import com.devgoo.commons.wrapper.PhatFile;
+import org.json.JSONException;
 import org.junit.Before;
 import org.junit.Test;
+import org.xml.sax.SAXException;
 
+import javax.xml.parsers.ParserConfigurationException;
 import java.io.IOException;
 
 import static org.junit.Assert.assertNotNull;
@@ -22,8 +25,8 @@ public class JsonParserTest {
 
 	private Parser parser;
 
-	private final String PATH_TO_JSON_FILE = "files/parser/jsonFile.json";
-	private final String PATH_TO_JSON_LIST_FILE = "files/parser/jsonListFile.json";
+	private final String PATH_TO_JSON_FILE = "files/json/jsonFile.json";
+	private final String PATH_TO_JSON_LIST_FILE = "files/json/jsonListFile.json";
 
 	@Before
 	public void setUp() {
@@ -39,7 +42,7 @@ public class JsonParserTest {
 	 * More specifically, it ensures that a file with valid JSON Object.
 	 */
 	@Test
-	public void testParseJsonFile() throws UnknownFileFormatException, IOException, InvalidFileFormatException {
+	public void testParseJsonFile() throws UnknownFileFormatException, IOException, InvalidFileFormatException, ParserConfigurationException, SAXException, JSONException {
 		PhatFile plainTextFile = parser.parseFile(classLoader.getResource(PATH_TO_JSON_FILE).getPath(), FileFormats.JSON);
 
 		assertNotNull(plainTextFile);
@@ -65,7 +68,7 @@ public class JsonParserTest {
 	 * More specifically, it ensures that a file with valid JSON Array.
 	 */
 	@Test
-	public void testParseJsonListFile() throws UnknownFileFormatException, IOException, InvalidFileFormatException {
+	public void testParseJsonListFile() throws UnknownFileFormatException, IOException, InvalidFileFormatException, ParserConfigurationException, SAXException, JSONException {
 		PhatFile plainTextFile = parser.parseFile(classLoader.getResource(PATH_TO_JSON_LIST_FILE).getPath(), FileFormats.JSON);
 
 		assertNotNull(plainTextFile);
