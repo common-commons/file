@@ -125,9 +125,9 @@ public class PhatFile extends java.io.File {
 	}
 
 	/**
-	 * Returns the file object as an org.json.JSONObject.
+	 * Returns the file object as an com.fasterxml.jackson.databind.JsonNode.
 	 *
-	 * @return org.json.JSONObject.
+	 * @return com.fasterxml.jackson.databind.JsonNode.
 	 * @throws InvalidFileFormatException
 	 */
 	public com.fasterxml.jackson.databind.JsonNode getAsJsonNode() throws InvalidFileFormatException, IOException, JSONException {
