@@ -5,7 +5,6 @@ import com.devgoo.commons.implementations.Validators;
 import com.devgoo.commons.interfaces.ValidatorInterface;
 import com.devgoo.commons.util.FileFormats;
 import org.json.JSONException;
-import org.w3c.dom.Document;
 import org.xml.sax.SAXException;
 
 import javax.xml.parsers.ParserConfigurationException;
@@ -17,7 +16,7 @@ import java.io.IOException;
 public class PhatFile extends java.io.File {
 	private final java.io.File file;
 	private org.json.JSONObject jsonObject;
-	private Document xmlDocument;
+	private org.w3c.dom.Document xmlDocument;
 	private FileFormats format;
 	private ValidatorInterface validators;
 	private String name;
