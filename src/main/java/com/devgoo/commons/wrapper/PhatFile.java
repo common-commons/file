@@ -5,7 +5,6 @@ import com.devgoo.commons.implementations.Validators;
 import com.devgoo.commons.interfaces.ValidatorInterface;
 import com.devgoo.commons.util.FileFormats;
 import org.json.JSONException;
-import org.w3c.dom.Document;
 import org.xml.sax.SAXException;
 
 import javax.xml.parsers.ParserConfigurationException;
@@ -17,7 +16,8 @@ import java.io.IOException;
 public class PhatFile extends java.io.File {
 	private final java.io.File file;
 	private org.json.JSONObject jsonObject;
-	private Document xmlDocument;
+	private com.fasterxml.jackson.databind.JsonNode jsonNode;
+	private org.w3c.dom.Document xmlDocument;
 	private FileFormats format;
 	private ValidatorInterface validators;
 	private String name;
@@ -121,6 +121,28 @@ public class PhatFile extends java.io.File {
 
 		}else{
 			throw new InvalidFileFormatException("The given file of type " + this.format + " cannot be returned as org.json.JSONObject.");
+		}
+	}
+
+	/**
+	 * Returns the file object as an com.fasterxml.jackson.databind.JsonNode.
+	 *
+	 * @return com.fasterxml.jackson.databind.JsonNode.
+	 * @throws InvalidFileFormatException
+	 */
+	public com.fasterxml.jackson.databind.JsonNode getAsJsonNode() throws InvalidFileFormatException, IOException, JSONException {
+
+		if(this.format.equals(FileFormats.JSON)){
+			if(this.jsonNode == null){
+
+				com.fasterxml.jackson.databind.ObjectMapper mapper = new com.fasterxml.jackson.databind.ObjectMapper();
+				this.jsonNode = mapper.readTree(this.getContentAsString());
+			}
+
+			return this.jsonNode;
+
+		}else{
+			throw new InvalidFileFormatException("The given file of type " + this.format + " cannot be returned as com.fasterxml.jackson.databind.JsonNode.");
 		}
 	}
 
