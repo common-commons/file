@@ -6,9 +6,12 @@ import com.devgoo.commons.implementations.Writer;
 import com.devgoo.commons.interfaces.WriterInterface;
 import com.devgoo.commons.util.FileFormats;
 import com.devgoo.commons.wrapper.PhatFile;
+import org.json.JSONException;
 import org.junit.Before;
 import org.junit.Test;
+import org.xml.sax.SAXException;
 
+import javax.xml.parsers.ParserConfigurationException;
 import java.io.IOException;
 import java.net.URL;
 
@@ -31,7 +34,7 @@ public class GenerateTxtFileTest {
 	}
 
 	@Test
-	public void writeTxtFile() throws UnknownFileFormatException {
+	public void writeTxtFile() throws UnknownFileFormatException, ParserConfigurationException, SAXException, JSONException {
 		try {
 			String content = "Hello World, how are you World ?";
 
@@ -48,9 +51,9 @@ public class GenerateTxtFileTest {
 	}
 
 	@Test
-	public void writeTxtWithFilePath() {
+	public void writeTxtWithFilePath() throws ParserConfigurationException, SAXException, JSONException {
 		try {
-			URL url = classLoader.getResource("files/writer/file1.txt");
+			URL url = classLoader.getResource("files/text/file1.txt");
 
 			assertNotNull(url);
 
@@ -70,7 +73,7 @@ public class GenerateTxtFileTest {
 	}
 
 	@Test
-	public void writeCorrectJSONFile() throws UnknownFileFormatException {
+	public void writeCorrectJSONFile() throws UnknownFileFormatException, ParserConfigurationException, SAXException, JSONException {
 		try {
 			String content = "{\"message\":\"Hello World, how are you World ?\"}";
 
@@ -87,7 +90,7 @@ public class GenerateTxtFileTest {
 	}
 
 	@Test
-	public void writeInCorrectJSONFile() throws UnknownFileFormatException {
+	public void writeInCorrectJSONFile() throws UnknownFileFormatException, ParserConfigurationException, SAXException, JSONException {
 		try {
 			String content = "{\"message\":Hello World, how are you World ?\"}";
 

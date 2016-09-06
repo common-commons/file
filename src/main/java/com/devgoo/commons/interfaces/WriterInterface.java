@@ -5,7 +5,10 @@ import com.devgoo.commons.exceptions.InvalidFileFormatException;
 import com.devgoo.commons.exceptions.UnknownFileFormatException;
 import com.devgoo.commons.util.FileFormats;
 import com.devgoo.commons.wrapper.PhatFile;
+import org.json.JSONException;
+import org.xml.sax.SAXException;
 
+import javax.xml.parsers.ParserConfigurationException;
 import java.io.IOException;
 
 /**
@@ -20,7 +23,7 @@ public interface WriterInterface {
 	 * @param output output format {e.g: csv, json, txt}
 	 * @return {@link PhatFile} which extends {@link java.io.File}
 	 */
-	PhatFile writeToFile(FileFormats output, String content, String absoluteFilePath) throws InvalidFileFormatException, java.io.IOException, UnknownFileFormatException;
+	PhatFile writeToFile(FileFormats output, String content, String absoluteFilePath) throws InvalidFileFormatException, IOException, UnknownFileFormatException, ParserConfigurationException, SAXException, JSONException;
 
 	/**
 	 * Write a string to a {@link java.io.File}
@@ -30,7 +33,7 @@ public interface WriterInterface {
 	 * @param output output format {e.g: csv, json, txt}
 	 * @return {@link PhatFile} which extends {@link java.io.File}
 	 */
-	PhatFile writeToFile(String name, String content, FileFormats output) throws java.io.IOException, InvalidFileFormatException, UnknownFileFormatException;
+	PhatFile writeToFile(String name, String content, FileFormats output) throws IOException, InvalidFileFormatException, UnknownFileFormatException, ParserConfigurationException, SAXException, JSONException;
 
 	/**
 	 * Write content of {@link org.json.JSONObject} to a {@link PhatFile} file
@@ -40,7 +43,7 @@ public interface WriterInterface {
 	 * @param output @param output output format {e.g: json, txt}
 	 * @return {@link PhatFile} which extends {@link java.io.File}
 	 */
-	PhatFile writeToFile(String name, org.json.JSONObject content, FileFormats output) throws IllegalPhatFileWriting, java.io.IOException;
+	PhatFile writeToFile(String name, org.json.JSONObject content, FileFormats output) throws IllegalPhatFileWriting, java.io.IOException, ParserConfigurationException, SAXException, JSONException;
 
 	/**
 	 * Write content of {@link org.json.JSONArray} to a {@link PhatFile} file
@@ -50,7 +53,7 @@ public interface WriterInterface {
 	 * @param output @param output output format {e.g: json, txt}
 	 * @return {@link PhatFile} which extends {@link java.io.File}
 	 */
-	PhatFile writeToFile(String name, org.json.JSONArray content, FileFormats output) throws java.io.IOException, IllegalPhatFileWriting;
+	PhatFile writeToFile(String name, org.json.JSONArray content, FileFormats output) throws java.io.IOException, IllegalPhatFileWriting, ParserConfigurationException, SAXException, JSONException;
 
-	PhatFile writeToFile(String name, org.w3c.dom.Document content, FileFormats output) throws IllegalPhatFileWriting, IOException;
+	PhatFile writeToFile(String name, org.w3c.dom.Document content, FileFormats output) throws IllegalPhatFileWriting, IOException, ParserConfigurationException, SAXException, JSONException;
 }

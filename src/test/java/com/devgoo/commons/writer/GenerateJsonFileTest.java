@@ -12,7 +12,9 @@ import org.json.JSONException;
 import org.json.JSONObject;
 import org.junit.Before;
 import org.junit.Test;
+import org.xml.sax.SAXException;
 
+import javax.xml.parsers.ParserConfigurationException;
 import java.io.IOException;
 import java.net.URL;
 
@@ -34,7 +36,7 @@ public class GenerateJsonFileTest {
 	}
 
 	@Test
-	public void writeCorrectJsonFile() {
+	public void writeCorrectJsonFile() throws JSONException, SAXException, ParserConfigurationException {
 		try {
 			String content = "{\"content\":\"Hello World, how are you World ?\"}";
 
@@ -51,7 +53,7 @@ public class GenerateJsonFileTest {
 	}
 
 	@Test
-	public void writeInCorrectJSONFile() {
+	public void writeInCorrectJSONFile() throws JSONException, SAXException, ParserConfigurationException {
 		try {
 			String content = "{\"message\":Hello World, how are you World ?\"}";
 
@@ -66,7 +68,7 @@ public class GenerateJsonFileTest {
 	}
 
 	@Test
-	public void writeCorrectJsonWithFilePath() {
+	public void writeCorrectJsonWithFilePath() throws JSONException, SAXException, ParserConfigurationException {
 		try {
 			URL url = classLoader.getResource("files/writer/file2.json");
 
@@ -88,7 +90,7 @@ public class GenerateJsonFileTest {
 	}
 
 	@Test
-	public void writeJsonObjectToJsonFile() {
+	public void writeJsonObjectToJsonFile() throws ParserConfigurationException, SAXException {
 		try {
 			String content = "{\"message\":\"Hello World, how are you World ?\"}";
 			JSONObject json = new JSONObject(content);
@@ -104,7 +106,7 @@ public class GenerateJsonFileTest {
 	}
 
 	@Test
-	public void writeJsonObjectToTxtFile() {
+	public void writeJsonObjectToTxtFile() throws ParserConfigurationException, SAXException {
 		try {
 			String content = "{\"message\":\"Hello World, how are you World ?\"}";
 			JSONObject json = new JSONObject(content);
@@ -120,7 +122,7 @@ public class GenerateJsonFileTest {
 	}
 
 	@Test
-	public void writeJsonArrayToJsonFile() {
+	public void writeJsonArrayToJsonFile() throws ParserConfigurationException, SAXException {
 		try {
 			String content = "[\"message\",\"I am going home\",\"message\",\"Hello World, how are you World ?\",\"message\",\"I was drinking Vodka\"]";
 			JSONArray json = new JSONArray(content);
@@ -136,7 +138,7 @@ public class GenerateJsonFileTest {
 	}
 
 	@Test
-	public void writeJsonArrayToTxtFile() {
+	public void writeJsonArrayToTxtFile() throws ParserConfigurationException, SAXException {
 		try {
 			String content = "[\"message\",\"I am going home\",\"message\",\"Hello World, how are you World ?\",\"message\",\"I was drinking Vodka\"]";
 			JSONArray json = new JSONArray(content);
