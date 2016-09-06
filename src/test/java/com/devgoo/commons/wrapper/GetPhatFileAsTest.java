@@ -65,7 +65,7 @@ public class GetPhatFileAsTest {
 	}
 
 	/**
-	 * Ensure that an xml file cannot be returned as a JSONObject.
+	 * Ensure that an attempt to get a JSONObject from XML content throws an exception.
 	 */
 	@Test(expected = InvalidFileFormatException.class)
 	public void testGetJsonObjectInstanceThrowsExceptionIfNotJsonContent() throws URISyntaxException, ParserConfigurationException, SAXException, JSONException, IOException, InvalidFileFormatException {
@@ -103,7 +103,7 @@ public class GetPhatFileAsTest {
 	}
 
 	/**
-	 * Ensure that an xml file cannot be returned as a JSONObject.
+	 * Ensure that an attempt to get an XMLDocument from JSON content throws an exception.
 	 */
 	@Test(expected = InvalidFileFormatException.class)
 	public void testGetXmlDocumentInstanceThrowsExceptionIfNotXmlContent() throws ParserConfigurationException, InvalidFileFormatException, SAXException, IOException, URISyntaxException, JSONException {
