@@ -91,9 +91,7 @@ public class Validators implements ValidatorInterface {
 	 * of the file.
 	 */
 	private boolean validateCsvFormat(String content) {
-
 		try{
-
 			return false;
 
 		} catch (Exception e){
@@ -111,7 +109,6 @@ public class Validators implements ValidatorInterface {
 	 * of the file.
 	 */
 	private boolean validateXmlFormat(String content) {
-
 		try{
 			javax.xml.parsers.DocumentBuilderFactory factory = javax.xml.parsers.DocumentBuilderFactory.newInstance();
 			factory.setValidating(false);

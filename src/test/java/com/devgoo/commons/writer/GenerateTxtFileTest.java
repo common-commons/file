@@ -21,7 +21,7 @@ import static org.junit.Assert.*;
 /**
  * Created by madimetja on 2016/09/02.
  */
-public class GenerateFileTest {
+public class GenerateTxtFileTest {
 	private WriterInterface writer;
 	private ClassLoader classLoader;
 
