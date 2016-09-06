@@ -45,7 +45,7 @@ public class GetPhatFileAsTest {
 		PhatFile phatFile = new PhatFile(url.toURI());
 
 		//Create an instance of the org.w3c.dom.Document
-		org.json.JSONObject JsonObject = new org.json.JSONObject("{\n" +
+		org.json.JSONObject jsonObject = new org.json.JSONObject("{\n" +
 			"  \"title\": \"Barney Is A Dinaa-whaaa??\",\n" +
 			"  \"description\": \"Incredibly random description...\",\n" +
 			"  \"listNode\": [\n" +
@@ -58,10 +58,8 @@ public class GetPhatFileAsTest {
 			"  }\n" +
 			"}");
 
-		org.json.JSONObject phatFileObjectInstance = phatFile.getAsJsonObject();
-
 		assertTrue(phatFile.getAsJsonObject() instanceof org.json.JSONObject);
-		assertEquals(JsonObject.toString(), phatFile.getAsJsonObject().toString());
+		assertEquals(jsonObject.toString(), phatFile.getAsJsonObject().toString());
 	}
 
 	/**
@@ -80,6 +78,52 @@ public class GetPhatFileAsTest {
 		assertNotNull(phatFile);
 
 		phatFile.getAsJsonObject();
+	}
+
+	@Test
+	public void testGetJsonNodeInstanceReturnsSuccessfullyForValidContent() throws URISyntaxException, IOException, InvalidFileFormatException, ParserConfigurationException, SAXException, JSONException {
+		URL url = classLoader.getResource(PATH_TO_VALID_JSON_FILE);
+		assertNotNull(url);
+		File tmp = new File(url.toURI());
+		assertTrue(tmp.exists());
+
+		PhatFile phatFile = new PhatFile(url.toURI());
+
+		//Create an instance of the org.w3c.dom.Document
+		com.fasterxml.jackson.databind.ObjectMapper mapper = new com.fasterxml.jackson.databind.ObjectMapper();
+		com.fasterxml.jackson.databind.JsonNode jsonNode = mapper.readTree("{\n" +
+			"  \"title\": \"Barney Is A Dinaa-whaaa??\",\n" +
+			"  \"description\": \"Incredibly random description...\",\n" +
+			"  \"listNode\": [\n" +
+			"    \"Value Within List\",\n" +
+			"    \"Another Value Within List\",\n" +
+			"    \"A Final Value Within The List\"\n" +
+			"  ],\n" +
+			"  \"nestedObject\": {\n" +
+			"    \"nestedKey\": \"Nested Key Value\"\n" +
+			"  }\n" +
+			"}");
+
+		assertTrue(phatFile.getAsJsonNode() instanceof com.fasterxml.jackson.databind.JsonNode);
+		assertEquals(jsonNode.toString(), phatFile.getAsJsonNode().toString());
+	}
+
+	/**
+	 * Ensure that an attempt to get a JSONObject from XML content throws an exception.
+	 */
+	@Test(expected = InvalidFileFormatException.class)
+	public void testGetJsonNodeInstanceThrowsExceptionIfNotJsonContent() throws URISyntaxException, ParserConfigurationException, SAXException, JSONException, IOException, InvalidFileFormatException {
+
+		URL url = classLoader.getResource(PATH_TO_VALID_XML_FILE);
+		assertNotNull(url);
+		File tmp = new File(url.toURI());
+		assertTrue(tmp.exists());
+
+		PhatFile phatFile = new PhatFile(url.toURI());
+
+		assertNotNull(phatFile);
+
+		phatFile.getAsJsonNode();
 	}
 
 	@Test
