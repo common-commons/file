@@ -6,8 +6,8 @@
   <packaging>jar</packaging>
   <version>0.1</version>
   <name>Common-Commons</name>
-  <url>http://devgoo.com, http://operadev.com</url>
-
+  <url>https://devgoo.com, https://operadev.com</url>
+s
   <licenses>
     <license>
       <name>The Apache Software License, Version 2.0</name>
@@ -33,7 +33,7 @@
   <scm>
     <connection>scm:git:git://github.com/commom-commons/file.git</connection>
     <developerConnection>scm:git:ssh://github.com:commom-commons/file.git</developerConnection>
-    <url>http://github.com/simpligility/ossrh-demo/tree/master</url>
+    <url>https://github.com/commom-commons/file</url>
   </scm>
 
   <dependencies>
