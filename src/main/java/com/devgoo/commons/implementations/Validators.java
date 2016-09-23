@@ -9,7 +9,9 @@ import com.devgoo.commons.wrapper.PhatFile;
 import java.io.IOException;
 
 /**
- * Created by chrismipi on 2016/09/02.
+ * Validators which implements {@link ValidatorInterface}
+ *
+ * The Supported file extensions are txt, csv, xml and json
  */
 public class Validators implements ValidatorInterface {
 
@@ -32,15 +34,13 @@ public class Validators implements ValidatorInterface {
 	}
 
 	/**
-	 *
 	 * Determines the FileFormats type of the file provided.
 	 *
 	 * @param file The PhatFile object.
 	 *
 	 * @return Returns the FileFormats type of the file. FileFormats.TXT is the default format.
 	 *
-	 * @throws IOException
-	 * @throws UnknownFileFormatException
+	 * @throws IOException if the file cannot be read
 	 */
 	@Override
 	public FileFormats determineFileType(PhatFile file) throws IOException {

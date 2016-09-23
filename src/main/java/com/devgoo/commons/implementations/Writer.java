@@ -19,7 +19,9 @@ import static com.devgoo.commons.util.FileFormats.JSON;
 import static com.devgoo.commons.util.FileFormats.XML;
 
 /**
- * Created by chrismipi on 2016/09/02.
+ * Writer which implements {@link WriterInterface}
+ *
+ * The Supported file extensions are txt, csv, xml and json
  */
 public class Writer implements WriterInterface {
 	private org.slf4j.Logger logger = org.slf4j.LoggerFactory.getLogger(getClass().getName());

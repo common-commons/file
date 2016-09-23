@@ -4,7 +4,6 @@ package com.devgoo.commons.util;
  * This enumeration describes the set of all supported file formats
  * for this library.
  *
- * Created by madimetja on 2016/09/02.
  */
 public enum FileFormats {
 	TXT (".txt"),

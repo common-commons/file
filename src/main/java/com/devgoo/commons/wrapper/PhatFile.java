@@ -11,7 +11,13 @@ import javax.xml.parsers.ParserConfigurationException;
 import java.io.IOException;
 
 /**
- * Created by madimetja on 2016/09/02.
+ * PhatFile which wraps the following classes:
+ * -{@link java.io.File}
+ * -{@link org.json.JSONObject}
+ * -{@link com.fasterxml.jackson.databind.JsonNode}
+ * -{@link org.w3c.dom.Document}
+ *
+ * More functionality is added
  */
 public class PhatFile extends java.io.File {
 	private final java.io.File file;
@@ -25,6 +31,11 @@ public class PhatFile extends java.io.File {
 	/**
 	 * Default constructor for {@link java.io.File}
 	 * @param pathname path to the file
+	 *
+	 * @throws IOException if the file cannot be read
+	 * @throws ParserConfigurationException general Parser exception
+	 * @throws SAXException XML file could not be read
+	 * @throws JSONException JSON file could not be read
 	 */
 	public PhatFile(String pathname) throws IOException, ParserConfigurationException, SAXException, JSONException {
 		super(pathname);
@@ -38,6 +49,11 @@ public class PhatFile extends java.io.File {
 	 * Default constructor for {@link java.io.File}
 	 * @param parent {@link String}
 	 * @param child {@link String}
+	 *
+	 * @throws IOException if the file cannot be read
+	 * @throws ParserConfigurationException general Parser exception
+	 * @throws SAXException XML file could not be read
+	 * @throws JSONException JSON file could not be read
 	 */
 	public PhatFile(String parent, String child) throws IOException, ParserConfigurationException, SAXException, JSONException {
 		super(parent, child);
@@ -51,6 +67,11 @@ public class PhatFile extends java.io.File {
 	 * Default constructor for {@link java.io.File}
 	 * @param parent {@link java.io.File}
 	 * @param child {@link java.io.File}
+	 *
+	 * @throws IOException if the file cannot be read
+	 * @throws ParserConfigurationException general Parser exception
+	 * @throws SAXException XML file could not be read
+	 * @throws JSONException JSON file could not be read
 	 */
 	public PhatFile(java.io.File parent, String child) throws IOException, ParserConfigurationException, SAXException, JSONException {
 		super(parent, child);
@@ -63,6 +84,11 @@ public class PhatFile extends java.io.File {
 	/**
 	 * Default constructor for {@link java.io.File}
 	 * @param uri path to the file
+	 *
+	 * @throws IOException if the file cannot be read
+	 * @throws ParserConfigurationException general Parser exception
+	 * @throws SAXException XML file could not be read
+	 * @throws JSONException JSON file could not be read
 	 */
 	public PhatFile(java.net.URI uri) throws IOException, ParserConfigurationException, SAXException, JSONException {
 		super(uri);
@@ -81,6 +107,8 @@ public class PhatFile extends java.io.File {
 	 * Converts the {@link java.io.File} contents to a {@link String}
 	 *
 	 * @return string {@link String}
+	 *
+	 * @throws java.io.IOException if the file cannot be read
 	 */
 	public String getContentAsString() throws java.io.IOException {
 		return new String(java.nio.file.Files.readAllBytes(java.nio.file.Paths.get(this.file.getAbsolutePath())));
@@ -107,8 +135,11 @@ public class PhatFile extends java.io.File {
 	/**
 	 * Returns the file object as an org.json.JSONObject.
 	 *
-	 * @return org.json.JSONObject.
-	 * @throws InvalidFileFormatException
+	 * @return {@link org.json.JSONObject}
+	 *
+	 * @throws InvalidFileFormatException file format is not Supported
+	 * @throws IOException if the file cannot be read
+	 * @throws JSONException JSON file could not be read
 	 */
 	public org.json.JSONObject getAsJsonObject() throws InvalidFileFormatException, IOException, JSONException {
 
@@ -125,10 +156,13 @@ public class PhatFile extends java.io.File {
 	}
 
 	/**
-	 * Returns the file object as an com.fasterxml.jackson.databind.JsonNode.
+	 * Returns the file object as a {@link com.fasterxml.jackson.databind.JsonNode}.
 	 *
-	 * @return com.fasterxml.jackson.databind.JsonNode.
-	 * @throws InvalidFileFormatException
+	 * @return {@link com.fasterxml.jackson.databind.JsonNode}
+	 *
+	 * @throws InvalidFileFormatException file format is not Supported
+	 * @throws IOException if the file cannot be read
+	 * @throws JSONException JSON file could not be read
 	 */
 	public com.fasterxml.jackson.databind.JsonNode getAsJsonNode() throws InvalidFileFormatException, IOException, JSONException {
 
@@ -149,12 +183,12 @@ public class PhatFile extends java.io.File {
 	/**
 	 * Returns the file object as an org.w3c.dom.Document.
 	 *
-	 * @return org.w3c.dom.Document.
+	 * @return {@link org.w3c.dom.Document}
 	 *
-	 * @throws InvalidFileFormatException
-	 * @throws ParserConfigurationException
-	 * @throws IOException
-	 * @throws SAXException
+	 * @throws InvalidFileFormatException file format not Supported
+	 * @throws ParserConfigurationException general Parser exception
+	 * @throws IOException if the file cannot be read
+	 * @throws SAXException XML file could not be read
 	 */
 	public org.w3c.dom.Document getAsDocument() throws InvalidFileFormatException, ParserConfigurationException, IOException, SAXException {
 
