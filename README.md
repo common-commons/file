@@ -2,8 +2,8 @@
 
 File is a Java library with a PhatFile wrapper providing capability to write, parse and valdiate files in the following formats:
 
-* JSON (Jackson and GSON supported)
-* XML (supported)
+* JSON (org.json.JSONObject and com.fasterxml.jackson.databind.JsonNode supported)
+* XML (org.w3c.dom.Document supported)
 * Free Format Text Fies
 * CSV file (still to come)
 
