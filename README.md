@@ -1,6 +1,6 @@
 # Common-Commons File Library
 
-File is a Java library with a PhatFile wrapper providing capability to write, parse and valdiate files in the following formats:
+File is a Java library with a PhatFile wrapper providing capability to write, parse and validate files in the following formats:
 
 * JSON (org.json.JSONObject and com.fasterxml.jackson.databind.JsonNode supported)
 * XML (org.w3c.dom.Document supported)
