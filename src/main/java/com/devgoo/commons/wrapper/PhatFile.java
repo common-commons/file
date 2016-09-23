@@ -11,7 +11,13 @@ import javax.xml.parsers.ParserConfigurationException;
 import java.io.IOException;
 
 /**
- * Created by madimetja on 2016/09/02.
+ * PhatFile which wraps the following classes:
+ * -{@link java.io.File}
+ * -{@link org.json.JSONObject}
+ * -{@link com.fasterxml.jackson.databind.JsonNode}
+ * -{@link org.w3c.dom.Document}
+ *
+ * More functionality is added
  */
 public class PhatFile extends java.io.File {
 	private final java.io.File file;
