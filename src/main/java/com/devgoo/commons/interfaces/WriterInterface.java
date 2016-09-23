@@ -12,7 +12,8 @@ import javax.xml.parsers.ParserConfigurationException;
 import java.io.IOException;
 
 /**
- * Created by madimetja on 2016/09/02.
+ * This class describes the contract to be adhered to by the WriterInterface interface.
+ *
  */
 public interface WriterInterface {
 	/**

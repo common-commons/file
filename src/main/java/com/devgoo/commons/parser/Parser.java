@@ -16,7 +16,6 @@ import java.io.IOException;
  * Concrete Parser Class. This class implements the contract specified by
  * the Parser Interface.
  *
- * Created by madimetja on 2016/09/02.
  */
 public class Parser implements ParserInterface {
 

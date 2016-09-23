@@ -9,7 +9,9 @@ import com.devgoo.commons.wrapper.PhatFile;
 import java.io.IOException;
 
 /**
- * Created by chrismipi on 2016/09/02.
+ * Validators which implements {@link ValidatorInterface}
+ *
+ * The Supported file extensions are txt, csv, xml and json
  */
 public class Validators implements ValidatorInterface {
 
