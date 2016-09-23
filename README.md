@@ -30,4 +30,4 @@ Apache 2.0
 [javadocs]:https://github.com/MadimetjaShika
 [the contribution documentation]:https://github.com/MadimetjaShika
 [Madi]:mailto:mmjshika@gmail.com?Subject=Common-Commons-File
-[Chris]:mailto:mmjshika@gmail.com?Subject=Common-Commons-File
+[Chris]:mailto:christopher.mipi@gmail.com?Subject=Common-Commons-File
