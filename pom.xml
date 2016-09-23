@@ -8,6 +8,34 @@
   <name>Common-Commons</name>
   <url>http://devgoo.com, http://operadev.com</url>
 
+  <licenses>
+    <license>
+      <name>The Apache Software License, Version 2.0</name>
+      <url>http://www.apache.org/licenses/LICENSE-2.0.txt</url>
+    </license>
+  </licenses>
+
+  <developers>
+    <developer>
+      <name>Madimetja Shika</name>
+      <email>mmjshika@gmail.com</email>
+      <organization>Common-commons</organization>
+      <organizationUrl>https://www.devgoo.com</organizationUrl>
+    </developer>
+    <developer>
+      <name>Makhabane Mipi</name>
+      <email>christopher.mipi@gmail.com</email>
+      <organization>Common-commons</organization>
+      <organizationUrl>https://www.operadev.com</organizationUrl>
+    </developer>
+  </developers>
+
+  <scm>
+    <connection>scm:git:git://github.com/commom-commons/file.git</connection>
+    <developerConnection>scm:git:ssh://github.com:commom-commons/file.git</developerConnection>
+    <url>http://github.com/simpligility/ossrh-demo/tree/master</url>
+  </scm>
+
   <dependencies>
     <dependency>
       <groupId>junit</groupId>
@@ -83,6 +111,33 @@
           </archive>
         </configuration>
       </plugin>
+
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-source-plugin</artifactId>
+        <executions>
+          <execution>
+            <id>attach-sources</id>
+            <goals>
+              <goal>jar</goal>
+            </goals>
+          </execution>
+        </executions>
+      </plugin>
+
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-javadoc-plugin</artifactId>
+        <executions>
+          <execution>
+            <id>attach-javadocs</id>
+            <goals>
+              <goal>jar</goal>
+            </goals>
+          </execution>
+        </executions>
+      </plugin>
+
     </plugins>
   </build>
 

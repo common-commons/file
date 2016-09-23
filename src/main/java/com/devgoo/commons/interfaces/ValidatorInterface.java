@@ -16,6 +16,7 @@ public interface ValidatorInterface {
 	 * @param content the string content
 	 * @param format the format of the content {@link FileFormats}
 	 * @return returns either true of false
+	 * @throws UnknownFileFormatException if the file is not Supported
 	 */
 	boolean validate(String content, FileFormats format) throws UnknownFileFormatException;
 
@@ -25,6 +26,7 @@ public interface ValidatorInterface {
 	 * @param file The PhatFile object.
 	 *
 	 * @return Returns the FileFormats format of the file.
+	 * @throws IOException if the file cannot be read
 	 */
 	FileFormats determineFileType(PhatFile file) throws IOException;
 }

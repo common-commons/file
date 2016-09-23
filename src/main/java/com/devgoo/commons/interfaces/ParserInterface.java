@@ -18,12 +18,19 @@ import java.io.IOException;
 public interface ParserInterface {
 
 	/**
-	 * Parses a given file on the file system.
+	 * * Parses a given file on the file system.
 	 *
 	 * @param absoluteFilePath The absolute path to the file to be parsed.
 	 * @param fileFormat The format of the file to be parsed.
 	 *
 	 * @return Returns a PhatFile instance of the file parsed.
+	 *
+	 * @throws IOException if the file cannot be read
+	 * @throws InvalidFileFormatException file not Supported
+	 * @throws UnknownFileFormatException file not Supported
+	 * @throws ParserConfigurationException general Parser exception
+	 * @throws SAXException XML file could not be read
+	 * @throws JSONException JSON file could not be read
 	 */
 	PhatFile parseFile(String absoluteFilePath, FileFormats fileFormat) throws UnknownFileFormatException, IOException, InvalidFileFormatException, ParserConfigurationException, SAXException, JSONException;
 }

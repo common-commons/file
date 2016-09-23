@@ -32,15 +32,13 @@ public class Validators implements ValidatorInterface {
 	}
 
 	/**
-	 *
 	 * Determines the FileFormats type of the file provided.
 	 *
 	 * @param file The PhatFile object.
 	 *
 	 * @return Returns the FileFormats type of the file. FileFormats.TXT is the default format.
 	 *
-	 * @throws IOException
-	 * @throws UnknownFileFormatException
+	 * @throws IOException if the file cannot be read
 	 */
 	@Override
 	public FileFormats determineFileType(PhatFile file) throws IOException {
