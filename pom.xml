@@ -4,7 +4,7 @@
   <groupId>com.devgoo.common-commons</groupId>
   <artifactId>file</artifactId>
   <packaging>jar</packaging>
-  <version>0.1</version>
+  <version>1.0.0</version>
   <name>${project.groupId}:${project.artifactId}</name>
   <description>A Java library with a PhatFile wrapper providing capability to write, parse and validate JSON, XMl, CSV.</description>
   <url>https://devgoo.com, https://operadev.com</url>
