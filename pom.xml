@@ -187,6 +187,16 @@
         </configuration>
       </plugin>
 
+      <!-- Dependency Location Enabler -->
+      <plugin>
+        <groupId>com.devgoo.common-commons</groupId>
+        <artifactId>file</artifactId>
+        <version>1.0.0</version>
+        <configuration>
+          <dependencyLocationsEnabled>false</dependencyLocationsEnabled>
+        </configuration>
+      </plugin>
+
     </plugins>
   </build>
 
