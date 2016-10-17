@@ -3,6 +3,9 @@
 # Mobile Tools for Java (J2ME)
 .mtj.tmp/
 .idea/workspace.xml
+.idea/compiler.xml
+.idea/misc.xml
+.idea/dictionaries/
 .idea/uiDesigner.xml
 .idea/dictionaries/*
 target/
