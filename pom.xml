@@ -9,19 +9,6 @@
   <description>A Java library with a PhatFile wrapper providing capability to write, parse and validate JSON, XMl, CSV.</description>
   <url>https://devgoo.com, https://operadev.com</url>
 
-  <reporting>
-    <plugins>
-      <plugin>
-        <groupId>com.devgoo.common-commons</groupId>
-        <artifactId>file</artifactId>
-        <version>1.0.0</version>
-        <configuration>
-          <dependencyLocationsEnabled>false</dependencyLocationsEnabled>
-        </configuration>
-      </plugin>
-    </plugins>
-  </reporting>
-
   <licenses>
     <license>
       <name>The Apache Software License, Version 2.0</name>
@@ -197,6 +184,16 @@
           <serverId>ossrh</serverId>
           <nexusUrl>https://oss.sonatype.org/</nexusUrl>
           <autoReleaseAfterClose>true</autoReleaseAfterClose>
+        </configuration>
+      </plugin>
+
+      <!-- Dependency Location Enabler -->
+      <plugin>
+        <groupId>com.devgoo.common-commons</groupId>
+        <artifactId>file</artifactId>
+        <version>1.0.0</version>
+        <configuration>
+          <dependencyLocationsEnabled>false</dependencyLocationsEnabled>
         </configuration>
       </plugin>
 
