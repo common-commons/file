@@ -6,10 +6,10 @@ build:
 	mvn site
 
 copy-docs:
-	@echo 'copying the docs to ../common-commons.github.io ...' &&\
-	rm -rf ../common-commons.github.io/* && \
-	cp -R ./target/apidocs/* ../commom-commons.github.io
+	@echo 'copying the docs to ../file.github.io ...' &&\
+	rm -rf ../common-commons.github.io/file/* && \
+	cp -R ./target/apidocs/* ../common-commons.github.io/file/
 	
 push-to-github:
 	@echo 'pushing the docs to github ...' && \
-	cd ../commom-commons.github.io && git add --all && git commit -m "deployment on " && git push origin master
+	cd ../common-commons.github.io && git add --all && git commit -m "deployment on " && git push origin master
