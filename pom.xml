@@ -32,9 +32,9 @@
   </developers>
 
   <scm>
-    <connection>scm:git:git://github.com/commom-commons/file.git</connection>
-    <developerConnection>scm:git:ssh://github.com:commom-commons/file.git</developerConnection>
-    <url>https://github.com/commom-commons/file</url>
+    <connection>scm:git:git://github.com/common-commons/file.git</connection>
+    <developerConnection>scm:git:ssh://github.com:common-commons/file.git</developerConnection>
+    <url>https://github.com/common-commons/file</url>
   </scm>
 
   <distributionManagement>
