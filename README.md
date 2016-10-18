@@ -9,7 +9,7 @@ File is a Java library with a PhatFile wrapper providing capability to write, pa
 
 ## Usage Examples
 
-File Validations
+File validations
 
 ```java
 try{
@@ -36,16 +36,23 @@ try{
 }
 ```
 
-Manipulating JSON content with com.fasterxml.jackson.databind.JsonNode
+Reading content from different file types
 
 ```java
 try{
-	PhatFile phatJsonFile = new PhatFile("path/to/some/json/file.json");
+	PhatFile phatFileObject = new PhatFile("path/to/some/json/file");
 	
-	JsonNode jsonNode = phatJsonFile.getAsJsonNode();
+	//Retrieve the content as a JsonNode 
+	JsonNode jsonNode = phatFileObject.getAsJsonNode();
+	
+	//Retrieve the content as a JSONObject 
+	JSONObject jsonObject = phatFileObject.getAsJsonObject();
+	
+	//Retrieve the content as an XML Document 
+	Document document = phatFileObject.getAsDocument();
 	
 	//...
-	//Manipulate the JsonNode as you wish
+	//Manipulate the objects as you wish
 	//...
 	
 } catch (IOException e) {
@@ -55,42 +62,25 @@ try{
 }
 ```
 
-Manipulating JSON content with org.json.JSONObject
+Writing content to different file types
 
 ```java
 try{
-	PhatFile phatJsonFile = new PhatFile("JsonFile.json");
+
+	Writer writer = new Writer();
+	FileFormats outputFileFormat = FileFormats.JSON;
+	String contentToWrite = "Some content in some format you want to write...";
+	String outputFilePath = "/path/to/the/where/you/would/like/to/write";
 	
-	JSONObject jsonObject = phatJsonFile.getAsJsonObject();
+	PhatFile writtenFile = writer.writeToFile(outputFileFormat, contentToWrite, outputFilePath);
 	
 	//...
-	//Manipulate the JSONObject as you wish
+	//Manipulate the writtenFile object as you wish
 	//...
 	
 } catch (IOException e) {
 	//Handle IOException
 } catch (ParserConfigurationException e) {
-	//Handle ParserConfigurationException
-}
-```
-
-Manipulating XML content with org.w3c.dom.Document
-
-```java
-try{
-	PhatFile phatJsonFile = new PhatFile("JsonFile.json");
-	
-	Document document = phatJsonFile.getAsDocument();
-	
-	//...
-	//Manipulate the Document as you wish
-	//...
-	
-} catch (IOException e) {
-	//Handle IOException
-} catch (ParserConfigurationException e) {
-	//Handle ParserConfigurationException
-} catch (SAXException e) {
 	//Handle ParserConfigurationException
 }
 ```
