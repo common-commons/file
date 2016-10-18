@@ -13,14 +13,14 @@ File validations
 
 ```java
 try{
-	PhatFile phatFileObject = new PhatFile("SomeFile");
+	PhatFile phatFileObject = new PhatFile("/absolute/path/to/some/file");
 	Validators validators = new Validators();
 	
 	//Get the content of the file as a string
 	String fileContent = phatFileObject.getContentAsString();
 	
-	//Get the file format of the file parsed.
-	FileFormats fileFormat =  validators.determineFileType(phatJsonFile);
+	//Get the file format of the file based on the content
+	FileFormats fileFormat =  validators.determineFileType(phatFileObject);
 	
 	//Validate if the content within a file is valid for a specific file type
 	boolean isValidJsonContent = validators.validate(fileContent, FileFormats.JSON);
@@ -40,7 +40,7 @@ Reading content from different file types
 
 ```java
 try{
-	PhatFile phatFileObject = new PhatFile("path/to/some/json/file");
+	PhatFile phatFileObject = new PhatFile("/absolute/path/to/some/file");
 	
 	//Retrieve the content as a JsonNode 
 	JsonNode jsonNode = phatFileObject.getAsJsonNode();
@@ -51,9 +51,9 @@ try{
 	//Retrieve the content as an XML Document 
 	Document document = phatFileObject.getAsDocument();
 	
-	//...
-	//Manipulate the objects as you wish
-	//...
+	/*
+	* Manipulate the objects as you wish...
+	*/
 	
 } catch (IOException e) {
 	//Handle IOException
@@ -74,9 +74,9 @@ try{
 	
 	PhatFile writtenFile = writer.writeToFile(outputFileFormat, contentToWrite, outputFilePath);
 	
-	//...
-	//Manipulate the writtenFile object as you wish
-	//...
+	/*
+	* Manipulate the writtenFile as you wish...
+	*/
 	
 } catch (IOException e) {
 	//Handle IOException
@@ -102,7 +102,7 @@ Thank you for considering contributing to this library! Please see [the contribu
 
 ## Bugs and Issues
 
-If you discover any bugs within the library or disscover any issues, please log an [issue] or send an email to either [Madi] or [Chris], and we will check it out.
+If you discover any bugs or issues with the library, please log an [issue] or send an email to either [Madi] or [Chris], and we will check it out.
 
 License
 ----
