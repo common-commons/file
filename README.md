@@ -109,9 +109,9 @@ License
 
 Apache 2.0
 
-[here]:https://common-commons.github.io/file/
+[here]:https://mvnrepository.com/artifact/com.devgoo.common-commons/file/1.0.0
 [javadocs]:https://common-commons.github.io/file/
 [the contribution documentation]:https://common-commons.github.io/contribution/
-[issue]:https://github.com/common-commons/file/issues
+[issue]:https://github.com/common-commons/file/issues/new
 [Madi]:mailto:mmjshika@gmail.com?Subject=Common-Commons-File
 [Chris]:mailto:christopher.mipi@gmail.com?Subject=Common-Commons-File
