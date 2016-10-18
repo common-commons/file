@@ -21,6 +21,21 @@ public class Parser implements ParserInterface {
 
 	private Validators validators = new Validators();
 
+	/**
+	 * Parses a given file with a given file format and returns the file as
+	 * a {@link PhatFile}.
+	 *
+	 * @param absoluteFilePath The absolute path to the file to be parsed.
+	 * @param fileFormat The format of the file to be parsed.
+	 *
+	 * @return {@link PhatFile}
+	 * @throws UnknownFileFormatException Thrown in the event that the given file format is unknown or unsupported.
+	 * @throws IOException Thrown if there was some IO error while parsing the file.
+	 * @throws InvalidFileFormatException Thrown in the event that the given file format is incorrect for the content in the file.
+	 * @throws ParserConfigurationException Thrown in the event that an error occurred while constructing the {@link PhatFile}
+	 * @throws SAXException Thrown if there was some error parsing the content for as an XML Document.
+	 * @throws JSONException Thrown if there was some error parsing the content as JSON.
+	 */
 	public PhatFile parseFile(String absoluteFilePath, FileFormats fileFormat) throws UnknownFileFormatException, IOException, InvalidFileFormatException, ParserConfigurationException, SAXException, JSONException {
 
 		switch (fileFormat) {
@@ -96,6 +111,19 @@ public class Parser implements ParserInterface {
 		return validateAndParseFile(absoluteFilePath, FileFormats.XML);
 	}
 
+	/**
+	 * Validates that the content of the indicated file matches the given format.
+	 *
+	 * @param absoluteFilePath The absolute path to the file.
+	 * @param fileFormat The file format to which the content should be parsed to.
+	 * @return
+	 * @throws IOException Thrown if there was some IO error while parsing the file.
+	 * @throws InvalidFileFormatException Thrown in the event that the given file format is incorrect for the content in the file.
+	 * @throws UnknownFileFormatException Thrown in the event that the given file format is unknown or unsupported.
+	 * @throws ParserConfigurationException Thrown in the event that an error occurred while constructing the {@link PhatFile}
+	 * @throws SAXException Thrown if there was some error parsing the content for as an XML Document.
+	 * @throws JSONException Thrown if there was some error parsing the content as JSON.
+	 */
 	private PhatFile validateAndParseFile(String absoluteFilePath, FileFormats fileFormat) throws IOException, InvalidFileFormatException, UnknownFileFormatException, ParserConfigurationException, SAXException, JSONException {
 		PhatFile jsonFile = new PhatFile(absoluteFilePath);
 
