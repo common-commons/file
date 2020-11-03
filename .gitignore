@@ -8,6 +8,7 @@
 .idea/dictionaries/
 .idea/uiDesigner.xml
 .idea/dictionaries/*
+.idea/libraries/*
 target/
 **.iml
 **/*DS_Store
